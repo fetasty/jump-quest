@@ -13,8 +13,26 @@ config_version=5
 config/name="jump-quest"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+addons/icon_finder/preview_size=24
+
+[autoload]
+
+Logger="*res://addons/godot-logger/logger.gd"
+IconsFonts="*res://addons/icons-fonts/icons_fonts/IconsFonts.gd"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/window_width_override=1920
+window/size/window_height_override=1080
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot-logger/plugin.cfg", "res://addons/icons-fonts/plugin.cfg", "res://addons/rakugo-nodes/plugin.cfg")
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
