@@ -7,6 +7,8 @@ Use this project to practice our knowledge of Godot game development.
 
 Implement the basic gameplay of Flapy-Bird.
 
+- [ ] Implement a player that can jump.
+
 
 ## Stage 2: Creative content
 

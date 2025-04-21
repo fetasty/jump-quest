@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3ckf0gnsc54"]
+
+[ext_resource type="Script" uid="uid://dg0kudwtmkxal" path="res://player/player.gd" id="1_oul6g"]
+[ext_resource type="Texture2D" uid="uid://bolqt68uoe045" path="res://art/chick.tres" id="2_rkbax"]
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_oul6g")
+
+[node name="JumpTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("2_rkbax")
+
+[connection signal="timeout" from="JumpTimer" to="." method="_on_jump_timer_timeout"]
