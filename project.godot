@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="jump-quest"
+run/main_scene="uid://cd5n8v8xs40ek"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 addons/icon_finder/preview_size=24
@@ -19,6 +20,11 @@ addons/icon_finder/preview_size=24
 
 Logger="*res://addons/godot-logger/logger.gd"
 IconsFonts="*res://addons/icons-fonts/icons_fonts/IconsFonts.gd"
+GameEvent="*res://autoload/game_event.gd"
+SaveLoadManager="*res://autoload/save_load_manager.gd"
+GameState="*res://autoload/game_state.gd"
+UiManager="*res://autoload/ui_manager.gd"
+AudioManager="*res://autoload/audio_manager.gd"
 
 [display]
 
