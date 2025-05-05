@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://qk832p8i7x8w" path="res://menu/main_menu.gd" id="1_1x3cv"]
 [ext_resource type="FontFile" uid="uid://bbfeoo2kuf30n" path="res://addons/icons-fonts/icons_fonts/MaterialIcons/material_design_icons.ttf" id="1_o5w3e"]
-[ext_resource type="Script" uid="uid://sfoyl3fbn8so" path="res://addons/icons-fonts/nodes/FontIcon.gd" id="2_1x3cv"]
 [ext_resource type="Script" uid="uid://cb15ev6uj0mae" path="res://addons/icons-fonts/resources/FontIconSetting.gd" id="3_jc45y"]
+[ext_resource type="Script" uid="uid://bcaq00hs46apu" path="res://menu/mute_icon.gd" id="3_o5w3e"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_s8mfa"]
 font = ExtResource("1_o5w3e")
@@ -12,7 +12,7 @@ shadow_size = 0
 shadow_color = Color(1, 1, 1, 1)
 shadow_offset = Vector2(0, 0)
 
-[sub_resource type="Resource" id="Resource_0tw43"]
+[sub_resource type="Resource" id="Resource_1x3cv"]
 script = ExtResource("3_jc45y")
 icon_font = "MaterialIcons"
 icon_name = "volume-source"
@@ -23,6 +23,7 @@ outline_size = 0
 shadow_color = Color(1, 1, 1, 1)
 shadow_size = 0
 shadow_offset = Vector2(0, 0)
+metadata/_custom_type_script = "uid://cb15ev6uj0mae"
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -91,10 +92,11 @@ alignment = 1
 [node name="MuteIcon" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 0
 text = "󱄠"
 label_settings = SubResource("LabelSettings_s8mfa")
-script = ExtResource("2_1x3cv")
-icon_settings = SubResource("Resource_0tw43")
+script = ExtResource("3_o5w3e")
+icon_settings = SubResource("Resource_1x3cv")
 metadata/_custom_type_script = "uid://sfoyl3fbn8so"
 
 [node name="VolumeSlider" type="HSlider" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
@@ -164,3 +166,12 @@ text = "Version:"
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.392543, 0.392543, 0.392543, 1)
+
+[connection signal="drag_ended" from="VBoxContainer/VBoxContainer/HBoxContainer/VolumeSlider" to="." method="_on_volume_slider_drag_ended"]
+[connection signal="toggled" from="VBoxContainer/VBoxContainer/CenterContainer/CountDownButton" to="." method="_on_count_down_button_toggled"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/RoleButton" to="." method="_on_role_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/GuideButton" to="." method="_on_guide_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
