@@ -1,0 +1,166 @@
+[gd_scene load_steps=7 format=3 uid="uid://b1n8h5b743810"]
+
+[ext_resource type="Script" uid="uid://qk832p8i7x8w" path="res://menu/main_menu.gd" id="1_1x3cv"]
+[ext_resource type="FontFile" uid="uid://bbfeoo2kuf30n" path="res://addons/icons-fonts/icons_fonts/MaterialIcons/material_design_icons.ttf" id="1_o5w3e"]
+[ext_resource type="Script" uid="uid://sfoyl3fbn8so" path="res://addons/icons-fonts/nodes/FontIcon.gd" id="2_1x3cv"]
+[ext_resource type="Script" uid="uid://cb15ev6uj0mae" path="res://addons/icons-fonts/resources/FontIconSetting.gd" id="3_jc45y"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_s8mfa"]
+font = ExtResource("1_o5w3e")
+font_size = 32
+shadow_size = 0
+shadow_color = Color(1, 1, 1, 1)
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_0tw43"]
+script = ExtResource("3_jc45y")
+icon_font = "MaterialIcons"
+icon_name = "volume-source"
+icon_size = 32
+icon_color = Color(1, 1, 1, 1)
+outline_color = Color(1, 1, 1, 1)
+outline_size = 0
+shadow_color = Color(1, 1, 1, 1)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1x3cv")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.392157)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 70
+alignment = 1
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Jump Quest"
+
+[node name="ScoreContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/ScoreContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Score:"
+
+[node name="Score" type="Label" parent="VBoxContainer/ScoreContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "0"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="MuteIcon" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "󱄠"
+label_settings = SubResource("LabelSettings_s8mfa")
+script = ExtResource("2_1x3cv")
+icon_settings = SubResource("Resource_0tw43")
+metadata/_custom_type_script = "uid://sfoyl3fbn8so"
+
+[node name="VolumeSlider" type="HSlider" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CountDownButton" type="CheckButton" parent="VBoxContainer/VBoxContainer/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "游戏开始倒计时"
+
+[node name="StartButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "开始游戏"
+
+[node name="RoleButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "形象选择"
+
+[node name="ContinueButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "继续游戏"
+
+[node name="RestartButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "重新开始"
+
+[node name="GuideButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "游戏引导"
+
+[node name="ExitButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "退出游戏"
+
+[node name="VersionContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -60.0
+offset_right = -40.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="VersionContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.392543, 0.392543, 0.392543, 1)
+text = "Version:"
+
+[node name="VersionInfo" type="Label" parent="VersionContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.392543, 0.392543, 0.392543, 1)

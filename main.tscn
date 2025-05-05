@@ -1,23 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://cd5n8v8xs40ek"]
+[gd_scene load_steps=2 format=3 uid="uid://cd5n8v8xs40ek"]
 
 [ext_resource type="Script" uid="uid://buwvlxgf6m3gk" path="res://main.gd" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://c3ckf0gnsc54" path="res://player/player.tscn" id="2_0xm2m"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_ig7tw")
 
 [node name="GameLayer" type="CanvasLayer" parent="."]
-
-[node name="Player" parent="GameLayer" instance=ExtResource("2_0xm2m")]
-position = Vector2(638, 332)
+unique_name_in_owner = true
 
 [node name="HudLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 
 [node name="TipLayer" type="CanvasLayer" parent="."]
 
 [node name="WindowLayer" type="CanvasLayer" parent="."]
 
 [node name="MenuLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 
 [node name="PopupLayer" type="CanvasLayer" parent="."]
 
