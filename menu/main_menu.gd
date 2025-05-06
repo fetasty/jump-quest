@@ -44,6 +44,10 @@ func update_game_state() -> void:
 			pass
 
 
+func restart_game() -> void:
+	Logger.info("Restart game!")
+
+
 func on_game_state_changed(state_name: StringName, _value: Variant) -> void:
 	match state_name:
 		GameState.GAME_STATE:
@@ -71,7 +75,7 @@ func _on_count_down_button_toggled(toggled_on: bool) -> void:
 
 
 func _on_start_button_pressed() -> void:
-	pass # Replace with function body.
+	restart_game()
 
 
 func _on_role_button_pressed() -> void:
@@ -83,7 +87,7 @@ func _on_continue_button_pressed() -> void:
 
 
 func _on_restart_button_pressed() -> void:
-	pass # Replace with function body.
+	restart_game()
 
 
 func _on_guide_button_pressed() -> void:

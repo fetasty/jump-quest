@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://dwijqmfidu20o"]
+
+[ext_resource type="Texture2D" uid="uid://dngtm18pu4l2x" path="res://art/jump-quest.png" id="1_ht35n"]
+
+[resource]
+atlas = ExtResource("1_ht35n")
+region = Rect2(66, 40, 28, 18)
