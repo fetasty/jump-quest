@@ -17,13 +17,14 @@ const VERSION_PATH = "res://resource/version.tres"
 @onready var version_info: Label = %VersionInfo
 
 
-var mute = false
+var mute: bool = false
 
 
 func _ready() -> void:
 	var version: Version = load(VERSION_PATH)
 	version_info.text = version.version_str()
 	update_game_state()
+	update_game_data()
 	GameState.game_state_changed.connect(on_game_state_changed)
 	mute_icon.clicked.connect(on_mute_icon_clicked)
 
@@ -42,6 +43,14 @@ func update_game_state() -> void:
 			restart_button.visible = true
 		_:
 			pass
+
+
+func update_game_data() -> void:
+	mute = SaveLoadManager.get_value("mute", false)
+	if mute:
+		mute_icon.icon_settings.icon_name = "volume-variant-off"
+	else:
+		mute_icon.icon_settings.icon_name = "volume-source"
 
 
 func restart_game() -> void:
