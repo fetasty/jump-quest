@@ -2,7 +2,7 @@ extends Node
 
 ## Manage all UI display and hiding
 
-const MAIN_MENU = "res://menu/main_menu.tscn"
+const MAIN_MENU = &"res://menu/main_menu.tscn"
 
 var hud_layer: CanvasLayer
 var menu_layer: CanvasLayer

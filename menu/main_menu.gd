@@ -17,20 +17,26 @@ const VERSION_PATH = "res://resource/version.tres"
 @onready var version_info: Label = %VersionInfo
 
 
-var mute: bool = false
-
-
 func _ready() -> void:
+	# connect signals
+	AudioManager.data_changed.connect(on_data_changed)
+	GameState.data_changed.connect(on_data_changed)
+	mute_icon.clicked.connect(on_mute_icon_clicked)
+	# init version info
 	var version: Version = load(VERSION_PATH)
 	version_info.text = version.version_str()
-	update_game_state()
-	update_game_data()
-	GameState.game_state_changed.connect(on_game_state_changed)
-	mute_icon.clicked.connect(on_mute_icon_clicked)
+	# load data
+	load_data()
 
 
-func update_game_state() -> void:
-	match GameState.game_state:
+func load_data() -> void:
+	update_game_state_ui(GameState.game_state)
+	update_mute_ui(AudioManager.mute)
+	update_volume_ui(AudioManager.volume)
+
+
+func update_game_state_ui(state: int) -> void:
+	match state:
 		GameState.GAME_STATE_WELCOME, GameState.GAME_STATE_GAME_OVER:
 			start_button.visible = true
 			role_button.visible = true
@@ -45,38 +51,42 @@ func update_game_state() -> void:
 			pass
 
 
-func update_game_data() -> void:
-	mute = SaveLoadManager.get_value("mute", false)
+func update_mute_ui(mute: bool) -> void:
 	if mute:
 		mute_icon.icon_settings.icon_name = "volume-variant-off"
 	else:
 		mute_icon.icon_settings.icon_name = "volume-source"
+
+
+func update_volume_ui(volume: float) -> void:
+	volume_slider.value = volume
 
 
 func restart_game() -> void:
 	Logger.info("Restart game!")
 
 
-func on_game_state_changed(state_name: StringName, _value: Variant) -> void:
-	match state_name:
-		GameState.GAME_STATE:
-			update_game_state()
+func on_data_changed(key: String, value: Variant):
+	match key:
+		AudioManager.KEY_MUTE:
+			update_mute_ui(value)
+		AudioManager.KEY_VOLUME:
+			update_volume_ui(value)
+		GameState.KEY_GAME_STATE:
+			update_game_state_ui(value)
 		_:
 			pass
 
 
 func on_mute_icon_clicked() -> void:
 	Logger.info("Mute icon clicked!")
-	mute = not mute
-	if mute:
-		mute_icon.icon_settings.icon_name = "volume-variant-off"
-	else:
-		mute_icon.icon_settings.icon_name = "volume-source"
+	AudioManager.mute = not AudioManager.mute
 
 
 func _on_volume_slider_drag_ended(value_changed: bool) -> void:
 	if value_changed:
 		Logger.info("Volume changed to: %s" % volume_slider.value)
+		AudioManager.volume = volume_slider.value
 
 
 func _on_count_down_button_toggled(toggled_on: bool) -> void:
