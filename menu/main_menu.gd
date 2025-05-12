@@ -19,8 +19,7 @@ const VERSION_PATH = "res://resource/version.tres"
 
 func _ready() -> void:
 	# connect signals
-	AudioManager.data_changed.connect(on_data_changed)
-	GameState.data_changed.connect(on_data_changed)
+	GameEvent.data_changed.connect(on_data_changed)
 	mute_icon.clicked.connect(on_mute_icon_clicked)
 	# init version info
 	var version: Version = load(VERSION_PATH)
@@ -68,11 +67,11 @@ func restart_game() -> void:
 
 func on_data_changed(key: String, value: Variant):
 	match key:
-		AudioManager.KEY_MUTE:
+		Const.MUTE:
 			update_mute_ui(value)
-		AudioManager.KEY_VOLUME:
+		Const.VOLUME:
 			update_volume_ui(value)
-		GameState.KEY_GAME_STATE:
+		Const.GAME_STATE:
 			update_game_state_ui(value)
 		_:
 			pass

@@ -13,7 +13,7 @@ func _ready() -> void:
 	load_data()
 	create_autosave_timer()
 	# connect signals, connect all data change
-	AudioManager.data_changed.connect(set_value)
+	GameEvent.data_changed.connect(on_data_changed)
 
 
 func create_autosave_timer() -> void:
@@ -45,15 +45,23 @@ func save_data() -> void:
 		updated = false
 
 
-func get_value(key: String, default: Variant = null) -> Variant:
+func get_value(key: StringName, default: Variant = null) -> Variant:
 	if config_file.has_section_key(DEFAULT_SECTION, key):
 		return config_file.get_value(DEFAULT_SECTION, key)
 	else:
 		return default
 
 
-func set_value(key: String, value: Variant) -> void:
+func set_value(key: StringName, value: Variant) -> void:
 	var old_value = get_value(key)
 	if old_value != value:
 		config_file.set_value(DEFAULT_SECTION, key, value)
 		updated = true
+
+
+func on_data_changed(key: StringName, value: Variant) -> void:
+	match key:
+		Const.MUTE, Const.VOLUME:
+			set_value(key, value)
+		_:
+			pass

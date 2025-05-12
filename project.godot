@@ -20,6 +20,7 @@ addons/icon_finder/preview_size=24
 
 Logger="*res://addons/godot-logger/logger.gd"
 IconsFonts="*res://addons/icons-fonts/icons_fonts/IconsFonts.gd"
+Const="*res://autoload/const.gd"
 GameEvent="*res://autoload/game_event.gd"
 SaveLoadManager="*res://autoload/save_load_manager.gd"
 GameState="*res://autoload/game_state.gd"
