@@ -22,5 +22,21 @@ var game_state: int = GAME_STATE_WELCOME:
 #endregion
 
 #region Game Settings
+## Should count down before starting game
+var count_down: bool = true:
+	set(value):
+		if count_down != value:
+			count_down = value
+			GameEvent.data_changed.emit(Const.COUNT_DOWN, value)
+	get:
+		return count_down
 
+## Should show guide after launch game
+var show_guide: bool = true:
+	set(value):
+		if show_guide != value:
+			show_guide = value
+			GameEvent.data_changed.emit(Const.SHOW_GUIDE, value)
+	get:
+		return show_guide
 #endregion
