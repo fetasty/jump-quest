@@ -15,7 +15,18 @@ var _guide_player_jump_time: float = 0.0
 @onready var guide_1_button: Label = $Guide1/NinePatchRect/Guide1Button
 
 
+## Should show guide after launch game
+var show_guide: bool = true:
+	set(value):
+		if show_guide != value:
+			show_guide = value
+			GameEvent.data_changed.emit(Const.SHOW_GUIDE, value)
+	get:
+		return show_guide
+
+
 func _ready() -> void:
+	# TODO
 	match OS.get_name():
 		"Android", "iOS":
 			guide_1_title.text = tr("1. 点击屏幕跳跃")
@@ -24,8 +35,7 @@ func _ready() -> void:
 			pass
 	_guide_player_jump_y = guide_player.position.y
 	# TODO
-	#var show_guide = GameData.get_data("show_guide_when_launch_game")
-	var show_guide = true
+	show_guide = SaveLoadManager.get_value(Const.SHOW_GUIDE, true)
 	guide_button.button_pressed = show_guide
 	visible = show_guide
 
@@ -47,6 +57,4 @@ func _on_button_pressed() -> void:
 
 
 func _on_guide_button_toggled(toggled_on: bool) -> void:
-	# TODO
-	#GameData.set_data("show_guide_when_launch_game", toggled_on)
-	var show_guide = toggled_on
+	show_guide = toggled_on

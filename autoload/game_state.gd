@@ -2,8 +2,7 @@ extends Node
 
 ## Manage all global game states
 
-## Game play state
-
+#region Enum
 enum {
 	GAME_STATE_WELCOME,
 	GAME_STATE_PLAYING,
@@ -11,7 +10,15 @@ enum {
 	GAME_STATE_GAME_OVER,
 }
 
+enum {
+	ROLE_CHICK = 0,
+	ROLE_DOG = 1,
+	ROLE_PIG = 2,
+}
+#endregion
+
 #region Runtime game states
+## The current game play state
 var game_state: int = GAME_STATE_WELCOME:
 	set(value):
 		if game_state != value:
@@ -22,21 +29,19 @@ var game_state: int = GAME_STATE_WELCOME:
 #endregion
 
 #region Game Settings
-## Should count down before starting game
-var count_down: bool = true:
-	set(value):
-		if count_down != value:
-			count_down = value
-			GameEvent.data_changed.emit(Const.COUNT_DOWN, value)
-	get:
-		return count_down
 
-## Should show guide after launch game
-var show_guide: bool = true:
+
+## The role that currently works
+var role: int = ROLE_CHICK:
 	set(value):
-		if show_guide != value:
-			show_guide = value
-			GameEvent.data_changed.emit(Const.SHOW_GUIDE, value)
+		if role != value:
+			role = value
+			GameEvent.data_changed.emit(Const.ROLE, value)
 	get:
-		return show_guide
+		return role
 #endregion
+
+
+func _ready() -> void:
+	await get_tree().root.ready
+	role = SaveLoadManager.get_value(Const.ROLE, ROLE_CHICK)

@@ -32,11 +32,18 @@ grow_vertical = 2
 color = Color(0.182566, 0.182566, 0.182566, 1)
 
 [node name="Guide1" type="NinePatchRect" parent="."]
-layout_mode = 0
-offset_left = 63.0
-offset_top = 81.0
-offset_right = 357.0
-offset_bottom = 279.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -439.0
+offset_top = -251.0
+offset_right = -145.0
+offset_bottom = -53.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("1_dcgv6")
 patch_margin_left = 7
 patch_margin_top = 7
@@ -108,11 +115,18 @@ grow_vertical = 2
 text = "Space"
 
 [node name="Guide2" type="NinePatchRect" parent="."]
-layout_mode = 0
-offset_left = 105.0
-offset_top = 315.0
-offset_right = 373.0
-offset_bottom = 513.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -316.0
+offset_top = 3.0
+offset_right = -48.0
+offset_bottom = 201.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("1_dcgv6")
 patch_margin_left = 7
 patch_margin_top = 7
@@ -206,11 +220,17 @@ texture = ExtResource("4_mmhaj")
 stretch_mode = 2
 
 [node name="Guide3" type="NinePatchRect" parent="."]
-layout_mode = 0
-offset_left = 401.0
-offset_top = 103.0
-offset_right = 885.0
-offset_bottom = 397.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -248.0
+offset_right = 484.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("1_dcgv6")
 patch_margin_left = 7
 patch_margin_top = 7
@@ -551,6 +571,22 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 40
 text = "游戏说明"
 
+[node name="GuideButton" type="CheckButton" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -310.0
+offset_top = -149.0
+offset_right = -162.0
+offset_bottom = -125.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "游戏启动时显示此界面"
+
 [node name="Button" type="Button" parent="."]
 custom_minimum_size = Vector2(120, 42)
 layout_mode = 1
@@ -568,14 +604,5 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 24
 text = "我知道了"
 
-[node name="GuideButton" type="CheckButton" parent="."]
-layout_mode = 0
-offset_left = 782.0
-offset_top = 478.0
-offset_right = 920.0
-offset_bottom = 502.0
-theme_override_font_sizes/font_size = 10
-text = "游戏启动时显示此界面"
-
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="toggled" from="GuideButton" to="." method="_on_guide_button_toggled"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

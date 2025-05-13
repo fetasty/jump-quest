@@ -16,6 +16,10 @@ func _ready() -> void:
 	GameEvent.data_changed.connect(on_data_changed)
 
 
+func _exit_tree() -> void:
+	save_data()
+
+
 func create_autosave_timer() -> void:
 	var timer: Timer = Timer.new()
 	timer.wait_time = 5.0
@@ -61,7 +65,8 @@ func set_value(key: StringName, value: Variant) -> void:
 
 func on_data_changed(key: StringName, value: Variant) -> void:
 	match key:
-		Const.MUTE, Const.VOLUME:
+		Const.MUTE, Const.VOLUME, Const.ROLE,\
+		Const.SHOW_GUIDE, Const.COUNT_DOWN:
 			set_value(key, value)
 		_:
 			pass

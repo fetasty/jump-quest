@@ -3,7 +3,6 @@ extends Control
 
 const VERSION_PATH = "res://resource/version.tres"
 
-
 @onready var score: Label = %Score
 @onready var mute_icon: FontIcon = %MuteIcon
 @onready var volume_slider: HSlider = %VolumeSlider
@@ -15,6 +14,16 @@ const VERSION_PATH = "res://resource/version.tres"
 @onready var guide_button: Button = %GuideButton
 @onready var exit_button: Button = %ExitButton
 @onready var version_info: Label = %VersionInfo
+@onready var guide: Control = %Guide
+
+## Should count down before starting game
+var count_down: bool = true:
+	set(value):
+		if count_down != value:
+			count_down = value
+			GameEvent.data_changed.emit(Const.COUNT_DOWN, value)
+	get:
+		return count_down
 
 
 func _ready() -> void:
@@ -26,9 +35,12 @@ func _ready() -> void:
 	version_info.text = version.version_str()
 	# load data
 	load_data()
+	# TODO play background audio
 
 
 func load_data() -> void:
+	count_down = SaveLoadManager.get_value(Const.COUNT_DOWN, true)
+	count_down_button.set_pressed_no_signal(count_down)
 	update_game_state_ui(GameState.game_state)
 	update_mute_ui(AudioManager.mute)
 	update_volume_ui(AudioManager.volume)
@@ -89,7 +101,7 @@ func _on_volume_slider_drag_ended(value_changed: bool) -> void:
 
 
 func _on_count_down_button_toggled(toggled_on: bool) -> void:
-	pass # Replace with function body.
+	count_down = toggled_on
 
 
 func _on_start_button_pressed() -> void:
@@ -101,7 +113,7 @@ func _on_role_button_pressed() -> void:
 
 
 func _on_continue_button_pressed() -> void:
-	pass # Replace with function body.
+	print("Continue button pressed")
 
 
 func _on_restart_button_pressed() -> void:
@@ -109,8 +121,12 @@ func _on_restart_button_pressed() -> void:
 
 
 func _on_guide_button_pressed() -> void:
-	pass # Replace with function body.
+	guide.show()
 
 
 func _on_exit_button_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_rand_button_pressed() -> void:
+	print("Rank button pressed")
