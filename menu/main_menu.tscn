@@ -144,7 +144,7 @@ text = "游戏引导"
 [node name="RandButton" type="Button" parent="VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "游戏引导"
+text = "排行榜"
 
 [node name="ExitButton" type="Button" parent="VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true

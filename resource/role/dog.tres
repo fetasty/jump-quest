@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Role" load_steps=3 format=3 uid="uid://cmdyddtsve2tm"]
+
+[ext_resource type="Script" uid="uid://th0egijr0bqo" path="res://resource/role/role.gd" id="1_jymst"]
+[ext_resource type="Texture2D" uid="uid://dwijqmfidu20o" path="res://art/dog.tres" id="2_2myef"]
+
+[resource]
+script = ExtResource("1_jymst")
+id = 1
+texture = ExtResource("2_2myef")
+scale = 0.8
+metadata/_custom_type_script = "uid://th0egijr0bqo"

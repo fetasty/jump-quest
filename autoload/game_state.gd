@@ -10,11 +10,6 @@ enum {
 	GAME_STATE_GAME_OVER,
 }
 
-enum {
-	ROLE_CHICK = 0,
-	ROLE_DOG = 1,
-	ROLE_PIG = 2,
-}
 #endregion
 
 #region Runtime game states
@@ -32,7 +27,7 @@ var game_state: int = GAME_STATE_WELCOME:
 
 
 ## The role that currently works
-var role: int = ROLE_CHICK:
+var role: int = 0:
 	set(value):
 		if role != value:
 			role = value
@@ -44,4 +39,4 @@ var role: int = ROLE_CHICK:
 
 func _ready() -> void:
 	await get_tree().root.ready
-	role = SaveLoadManager.get_value(Const.ROLE, ROLE_CHICK)
+	role = SaveLoadManager.get_value(Const.ROLE, 0)

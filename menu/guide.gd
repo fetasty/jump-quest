@@ -34,7 +34,6 @@ func _ready() -> void:
 		_:
 			pass
 	_guide_player_jump_y = guide_player.position.y
-	# TODO
 	show_guide = SaveLoadManager.get_value(Const.SHOW_GUIDE, true)
 	guide_button.button_pressed = show_guide
 	visible = show_guide
