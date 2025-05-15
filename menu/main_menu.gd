@@ -15,6 +15,7 @@ const VERSION_PATH = "res://resource/version.tres"
 @onready var exit_button: Button = %ExitButton
 @onready var version_info: Label = %VersionInfo
 @onready var guide: Control = %Guide
+@onready var role_select: Control = %RoleSelect
 
 ## Should count down before starting game
 var count_down: bool = true:
@@ -109,7 +110,7 @@ func _on_start_button_pressed() -> void:
 
 
 func _on_role_button_pressed() -> void:
-	pass # Replace with function body.
+	role_select.show()
 
 
 func _on_continue_button_pressed() -> void:

@@ -7,7 +7,7 @@ var role_map: Dictionary = {}
 
 
 func _ready() -> void:
-	pass
+	load_roles()
 
 
 func get_role(id: int) -> Role:

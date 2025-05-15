@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://b1n8h5b743810"]
+[gd_scene load_steps=9 format=3 uid="uid://b1n8h5b743810"]
 
 [ext_resource type="Script" uid="uid://qk832p8i7x8w" path="res://menu/main_menu.gd" id="1_1x3cv"]
 [ext_resource type="FontFile" uid="uid://bbfeoo2kuf30n" path="res://addons/icons-fonts/icons_fonts/MaterialIcons/material_design_icons.ttf" id="1_o5w3e"]
 [ext_resource type="Script" uid="uid://cb15ev6uj0mae" path="res://addons/icons-fonts/resources/FontIconSetting.gd" id="3_jc45y"]
 [ext_resource type="Script" uid="uid://bcaq00hs46apu" path="res://menu/mute_icon.gd" id="3_o5w3e"]
 [ext_resource type="PackedScene" uid="uid://dsldwxppld7qs" path="res://menu/guide.tscn" id="5_jc45y"]
+[ext_resource type="PackedScene" uid="uid://ba1tb460sgjmu" path="res://menu/role_select.tscn" id="6_s8mfa"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_s8mfa"]
 font = ExtResource("1_o5w3e")
@@ -176,6 +177,11 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.392543, 0.392543, 0.392543, 1)
 
 [node name="Guide" parent="." instance=ExtResource("5_jc45y")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="RoleSelect" parent="." instance=ExtResource("6_s8mfa")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
