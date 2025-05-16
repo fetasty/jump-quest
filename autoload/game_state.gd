@@ -12,7 +12,6 @@ enum {
 
 #endregion
 
-#region Runtime game states
 ## The current game play state
 var game_state: int = GAME_STATE_WELCOME:
 	set(value):
@@ -21,19 +20,18 @@ var game_state: int = GAME_STATE_WELCOME:
 			GameEvent.data_changed.emit(Const.GAME_STATE, value)
 	get:
 		return game_state
-#endregion
-
-#region Game Settings
-
 
 ## The role that currently works
-var role: int = 0:
+var role: int = Role.CHICK:
 	set(value):
 		if role != value:
 			role = value
 			GameEvent.data_changed.emit(Const.ROLE, value)
 	get:
 		return role
+
+#region runtime states
+
 #endregion
 
 

@@ -75,6 +75,7 @@ func update_volume_ui(volume: float) -> void:
 
 
 func restart_game() -> void:
+	# TODO reset all runtime state, restart game
 	Logger.info("Restart game!")
 
 
@@ -114,6 +115,7 @@ func _on_role_button_pressed() -> void:
 
 
 func _on_continue_button_pressed() -> void:
+	# TODO resume
 	print("Continue button pressed")
 
 
@@ -130,4 +132,5 @@ func _on_exit_button_pressed() -> void:
 
 
 func _on_rand_button_pressed() -> void:
+	# TODO rank list
 	print("Rank button pressed")
