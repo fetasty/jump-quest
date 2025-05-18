@@ -6,8 +6,8 @@
 script = ExtResource("1_tr553")
 majar_version = 0
 minor_version = 1
-patch_number = 0
+patch_number = 1
 version_type = "debug"
-build_date = 20250421
-build_time = 2129
+build_date = 20250518
+build_time = 1154
 metadata/_custom_type_script = "uid://de20nhk542g10"
