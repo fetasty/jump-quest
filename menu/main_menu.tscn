@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b1n8h5b743810"]
+[gd_scene load_steps=10 format=3 uid="uid://b1n8h5b743810"]
 
 [ext_resource type="Script" uid="uid://qk832p8i7x8w" path="res://menu/main_menu.gd" id="1_1x3cv"]
 [ext_resource type="FontFile" uid="uid://bbfeoo2kuf30n" path="res://addons/icons-fonts/icons_fonts/MaterialIcons/material_design_icons.ttf" id="1_o5w3e"]
@@ -26,6 +26,8 @@ shadow_color = Color(1, 1, 1, 1)
 shadow_size = 0
 shadow_offset = Vector2(0, 0)
 metadata/_custom_type_script = "uid://cb15ev6uj0mae"
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_s8mfa"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -116,6 +118,30 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 text = "游戏开始倒计时"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Easy" type="CheckBox" parent="VBoxContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+button_group = SubResource("ButtonGroup_s8mfa")
+text = "简单"
+
+[node name="Normal" type="CheckBox" parent="VBoxContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+button_group = SubResource("ButtonGroup_s8mfa")
+text = "一般"
+
+[node name="Hard" type="CheckBox" parent="VBoxContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+button_group = SubResource("ButtonGroup_s8mfa")
+text = "困难"
 
 [node name="StartButton" type="Button" parent="VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true

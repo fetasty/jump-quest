@@ -27,7 +27,7 @@ class_name Version
 @export_range(0, 2459) var build_time: int = 2129
 
 
-## 返回版本字符串, 格式: 0.1.1_debug-build20240608
+## 返回版本字符串, 格式: 0.1.1_debug-build202406080830
 func version_str() -> String:
 	return "%s.%s.%s_%s-build%s%s" % [majar_version, minor_version, patch_number, version_type, build_date, build_time]
 

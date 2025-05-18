@@ -16,6 +16,7 @@ const VERSION_PATH = "res://resource/version.tres"
 @onready var version_info: Label = %VersionInfo
 @onready var guide: Control = %Guide
 @onready var role_select: Control = %RoleSelect
+@onready var difficulty_buttons: Array[Button] = [%Easy, %Normal, %Hard]
 
 ## Should count down before starting game
 var count_down: bool = true:
@@ -31,6 +32,9 @@ func _ready() -> void:
 	# connect signals
 	GameEvent.data_changed.connect(on_data_changed)
 	mute_icon.clicked.connect(on_mute_icon_clicked)
+	for i in range(0, difficulty_buttons.size()):
+		var btn = difficulty_buttons[i]
+		btn.pressed.connect(_on_difficulty_button_pressed.bind(i))
 	# init version info
 	var version: Version = load(VERSION_PATH)
 	version_info.text = version.version_str()
@@ -45,6 +49,7 @@ func load_data() -> void:
 	update_game_state_ui(GameState.game_state)
 	update_mute_ui(AudioManager.mute)
 	update_volume_ui(AudioManager.volume)
+	update_difficulty_ui(GameState.difficulty)
 
 
 func update_game_state_ui(state: int) -> void:
@@ -72,6 +77,10 @@ func update_mute_ui(mute: bool) -> void:
 
 func update_volume_ui(volume: float) -> void:
 	volume_slider.value = volume
+
+
+func update_difficulty_ui(value: int) -> void:
+	difficulty_buttons[value].set_pressed_no_signal(true)
 
 
 func restart_game() -> void:
@@ -134,3 +143,7 @@ func _on_exit_button_pressed() -> void:
 func _on_rand_button_pressed() -> void:
 	# TODO rank list
 	print("Rank button pressed")
+
+
+func _on_difficulty_button_pressed(value: int) -> void:
+	GameState.difficulty = value

@@ -65,8 +65,8 @@ func set_value(key: StringName, value: Variant) -> void:
 
 func on_data_changed(key: StringName, value: Variant) -> void:
 	match key:
-		Const.MUTE, Const.VOLUME, Const.ROLE,\
-		Const.SHOW_GUIDE, Const.COUNT_DOWN:
+		Const.MUTE, Const.VOLUME, Const.ROLE, Const.SHOW_GUIDE, Const.COUNT_DOWN,\
+		Const.DIFFICULTY:
 			set_value(key, value)
 		_:
 			pass
