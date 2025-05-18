@@ -14,8 +14,11 @@ var texture_scale: float
 
 func _ready() -> void:
 	add_to_group(ROLE_SELECT_ITEM_GROUP)
+	role.size = role_texture.get_size()
+	role.pivot_offset = role.size * 0.5
 	role.texture = role_texture
-	role.scale = Vector2.ONE * texture_scale
+	role.position = (size - role.size) * 0.5
+	role.scale = Vector2.ONE * texture_scale * 3.0
 	select_border.visible = (GameState.role == role_id)
 
 
