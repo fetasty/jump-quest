@@ -10,8 +10,6 @@ func _ready() -> void:
 	# Initialize ui manager
 	UiManager.hud_layer = hud_layer
 	UiManager.menu_layer = menu_layer
-	# wait for everything ready
-	await get_tree().root.ready
 	# Show main menu
 	UiManager.change_menu(UiManager.MAIN_MENU)
 

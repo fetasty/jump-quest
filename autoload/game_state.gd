@@ -53,6 +53,5 @@ var difficulty: int = DIFFICULTY_NORMAL:
 
 
 func _ready() -> void:
-	await get_tree().root.ready
 	role = SaveLoadManager.get_value(Const.ROLE, Role.CHICK)
 	difficulty = SaveLoadManager.get_value(Const.DIFFICULTY, DIFFICULTY_NORMAL)

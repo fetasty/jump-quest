@@ -8,7 +8,6 @@ const DEFAULT_SECTION = &"game"
 var config_file: ConfigFile = ConfigFile.new()
 var updated: bool = false
 
-
 func _ready() -> void:
 	load_data()
 	create_autosave_timer()
