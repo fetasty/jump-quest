@@ -2,3 +2,8 @@ root = true
 
 [*]
 charset = utf-8
+
+[*.gd]
+tab_width = 2
+indent_style = tab
+end_of_line = lf
