@@ -1,4 +1,5 @@
-class_name Difficulty extends Resource
+class_name Config
+extends Resource
 
 ## Barrier moving speed (px/s)
 @export var barrier_speed: float
@@ -27,20 +28,17 @@ class_name Difficulty extends Resource
 ## Item type rate [double, saw, shield]
 @export var item_type_rate: Array[float]
 
-## Level change interval (s)
-@export var level_change_interval: Array[float]
 
-## Level change value of barrier moving speed
-@export var level_change_barrier_speed: Array[float]
-
-## Level change value of barrier spawn interval
-@export var level_change_barrier_spawn_interval: Array[float]
-
-## Level change value of player jump speed
-@export var level_change_player_jump_speed: Array[float]
-
-## Level change value of player max jump time
-@export var level_change_player_max_jump_time: Array[float]
-
-## Level change value of player gravity
-@export var level_change_player_gravity: Array[float]
+## Change current config with another [Config] as offset value.
+func change(offset: Config) -> void:
+	barrier_speed += offset.barrier_speed
+	barrier_spawn_interval += offset.barrier_spawn_interval
+	barrier_upper_size_min += offset.barrier_upper_size_min
+	barrier_upper_size_max += offset.barrier_upper_size_max
+	player_jump_speed += offset.player_jump_speed
+	max_player_jump_time += offset.max_player_jump_time
+	player_gravity += offset.player_gravity
+	for i in range(0, item_generation_rate.size()):
+		item_generation_rate[i] += offset.item_generation_rate[i]
+	for i in range(0, item_type_rate.size()):
+		item_type_rate[i] += offset.item_type_rate[i]
