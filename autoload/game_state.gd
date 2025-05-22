@@ -9,12 +9,6 @@ enum {
 	GAME_STATE_PAUSED,
 	GAME_STATE_GAME_OVER,
 }
-
-enum {
-	DIFFICULTY_EASY,
-	DIFFICULTY_NORMAL,
-	DIFFICULTY_HARD,
-}
 #endregion
 
 #region Runtime game states
@@ -26,11 +20,20 @@ var game_state: int = GAME_STATE_WELCOME:
 			GameEvent.data_changed.emit(Const.GAME_STATE, value)
 	get:
 		return game_state
+
+
+## Real time effective configuration
+var current_config: Config = Config.new()
+#endregion
+
+#region Property
+## The difficulty config that currently works
+var current_difficulty_config: Difficulty:
+	get:
+		return ResourceManager.get_difficulty(difficulty)
 #endregion
 
 #region Game Settings
-
-
 ## The role that currently works
 var role: int = Role.CHICK:
 	set(value):
@@ -41,8 +44,8 @@ var role: int = Role.CHICK:
 		return role
 
 
-## The difficulty that currently works
-var difficulty: int = DIFFICULTY_NORMAL:
+## The difficulty id that currently works
+var difficulty: int = Difficulty.NORMAL:
 	set(value):
 		if difficulty != value:
 			difficulty = value
@@ -54,4 +57,10 @@ var difficulty: int = DIFFICULTY_NORMAL:
 
 func _ready() -> void:
 	role = SaveLoadManager.get_value(Const.ROLE, Role.CHICK)
-	difficulty = SaveLoadManager.get_value(Const.DIFFICULTY, DIFFICULTY_NORMAL)
+	difficulty = SaveLoadManager.get_value(Const.DIFFICULTY, Difficulty.NORMAL)
+	current_config.key = Const.REALTIME_CONFIG
+	current_config.copy_from(current_difficulty_config.basic_config)
+
+
+func reset_runtime_state() -> void:
+	pass

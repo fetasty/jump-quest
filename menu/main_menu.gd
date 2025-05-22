@@ -84,6 +84,7 @@ func update_difficulty_ui(value: int) -> void:
 
 
 func restart_game() -> void:
+	GameState.reset_runtime_state()
 	# TODO reset all runtime state, restart game
 	Logger.info("Restart game!")
 

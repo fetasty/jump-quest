@@ -2,9 +2,10 @@ extends Node
 
 const MODULE = &"resource_manager"
 const ROLE_FOLDER = &"res://resource/role"
+const DIFFICULTY_FOLDER = &"res://resource/config/difficulty"
 
 var role_map: Dictionary = {}
-
+var difficulty_map: Dictionary = {}
 
 func _ready() -> void:
 	load_roles()
@@ -20,6 +21,14 @@ func get_role(id: int) -> Role:
 
 func get_role_map() -> Dictionary:
 	return role_map
+
+
+func get_difficulty(id: int) -> Difficulty:
+	if difficulty_map.has(id):
+		return difficulty_map[id]
+	else:
+		Logger.error("Get difficulty by id %s failed!" % id, MODULE)
+		return null
 
 
 func visit_res_folder(path: String, f: Callable) -> void:
@@ -50,6 +59,17 @@ func load_one_role(res_path: String) -> void:
 		Logger.error("Load role from file %s failed!" % res_path, MODULE)
 
 
+func load_one_difficulty(res_path: String) -> void:
+	var res_data: Difficulty = load(res_path)
+	if res_data and not res_data.id < 0:
+		if difficulty_map.has(res_data.id):
+			Logger.error("Duplicate difficulty id found: %s in file: %s" % [res_data.id, res_path], MODULE)
+		else:
+			difficulty_map[res_data.id] = res_data
+
+
 func load_roles() -> void:
 	role_map.clear()
 	visit_res_folder(ROLE_FOLDER, load_one_role)
+	difficulty_map.clear()
+	visit_res_folder(DIFFICULTY_FOLDER, load_one_difficulty)
