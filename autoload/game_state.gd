@@ -21,9 +21,17 @@ var game_state: int = GAME_STATE_WELCOME:
 	get:
 		return game_state
 
-
 ## Real time effective configuration
 var current_config: Config = Config.new()
+
+## Real time buff status (s)
+var buff_status: Array[float] = []
+
+## Real time score
+var score: int = 0
+
+## Round time (s)
+var round_time: float = 0.0
 #endregion
 
 #region Property
@@ -75,3 +83,6 @@ func _ready() -> void:
 
 func reset_runtime_state() -> void:
 	current_config.copy_from(current_difficulty_config.basic_config)
+	buff_status.clear()
+	score = 0
+	round_time = 0

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Buff" load_steps=3 format=3 uid="uid://deoon67rno6i2"]
+
+[ext_resource type="Script" uid="uid://b32pjpj4uq3rj" path="res://resource/buff/buff.gd" id="1_tkksj"]
+[ext_resource type="Texture2D" uid="uid://kwax5jp1jjor" path="res://art/shield.tres" id="2_bnww2"]
+
+[resource]
+script = ExtResource("1_tkksj")
+id = 2
+texture = ExtResource("2_bnww2")
+metadata/_custom_type_script = "uid://b32pjpj4uq3rj"

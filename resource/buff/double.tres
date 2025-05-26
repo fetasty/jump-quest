@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Buff" load_steps=3 format=3 uid="uid://bkjk1isb6xlih"]
+
+[ext_resource type="Script" uid="uid://b32pjpj4uq3rj" path="res://resource/buff/buff.gd" id="1_0dupx"]
+[ext_resource type="Texture2D" uid="uid://c3is83dku5nwt" path="res://art/double_score.tres" id="2_nrmhl"]
+
+[resource]
+script = ExtResource("1_0dupx")
+id = 0
+texture = ExtResource("2_nrmhl")
+metadata/_custom_type_script = "uid://b32pjpj4uq3rj"
