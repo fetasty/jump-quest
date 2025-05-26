@@ -52,12 +52,23 @@ var difficulty: int = Difficulty.NORMAL:
 			GameEvent.data_changed.emit(Const.DIFFICULTY, value)
 	get:
 		return difficulty
+
+
+## Should count down before starting game
+var count_down: bool = true:
+	set(value):
+		if count_down != value:
+			count_down = value
+			GameEvent.data_changed.emit(Const.COUNT_DOWN, value)
+	get:
+		return count_down
 #endregion
 
 
 func _ready() -> void:
 	role = SaveLoadManager.get_value(Const.ROLE, Role.CHICK)
 	difficulty = SaveLoadManager.get_value(Const.DIFFICULTY, Difficulty.NORMAL)
+	count_down = SaveLoadManager.get_value(Const.COUNT_DOWN, true)
 	current_config.key = Const.REALTIME_CONFIG
 	current_config.copy_from(current_difficulty_config.basic_config)
 

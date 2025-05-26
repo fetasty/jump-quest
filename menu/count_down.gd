@@ -5,8 +5,8 @@ signal finished
 
 var count = 3
 
-@onready var label: Label = $Label
-@onready var timer: Timer = $Timer
+@onready var label: Label = %Label
+@onready var timer: Timer = %Timer
 
 
 func start() -> void:

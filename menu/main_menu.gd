@@ -18,15 +18,7 @@ const VERSION_PATH = "res://resource/version.tres"
 @onready var role_select: Control = %RoleSelect
 @onready var difficulty_container: HBoxContainer = %DifficultyContainer
 @onready var difficulty_buttons: Array[Button] = [%Easy, %Normal, %Hard]
-
-## Should count down before starting game
-var count_down: bool = true:
-	set(value):
-		if count_down != value:
-			count_down = value
-			GameEvent.data_changed.emit(Const.COUNT_DOWN, value)
-	get:
-		return count_down
+@onready var count_down: Control = %CountDown
 
 
 func _ready() -> void:
@@ -45,8 +37,7 @@ func _ready() -> void:
 
 
 func load_data() -> void:
-	count_down = SaveLoadManager.get_value(Const.COUNT_DOWN, true)
-	count_down_button.set_pressed_no_signal(count_down)
+	count_down_button.set_pressed_no_signal(GameState.count_down)
 	update_game_state_ui(GameState.game_state)
 	update_mute_ui(AudioManager.mute)
 	update_volume_ui(AudioManager.volume)
@@ -67,6 +58,8 @@ func update_game_state_ui(state: int) -> void:
 			continue_button.visible = true
 			restart_button.visible = true
 			difficulty_container.visible = false
+		GameState.GAME_STATE_PLAYING:
+			visible = false
 		_:
 			pass
 
@@ -87,9 +80,13 @@ func update_difficulty_ui(value: int) -> void:
 
 
 func restart_game() -> void:
-	GameState.reset_runtime_state()
-	# TODO reset all runtime state, restart game
 	Logger.info("Restart game!")
+	GameState.reset_runtime_state()
+	GameState.game_state = GameState.GAME_STATE_PLAYING
+	if GameState.count_down:
+		count_down.start()
+		await count_down.finished
+	# TODO reset all runtime state, restart game
 
 
 func on_data_changed(key: String, value: Variant):
@@ -116,7 +113,7 @@ func _on_volume_slider_drag_ended(value_changed: bool) -> void:
 
 
 func _on_count_down_button_toggled(toggled_on: bool) -> void:
-	count_down = toggled_on
+	GameState.count_down = toggled_on
 
 
 func _on_start_button_pressed() -> void:
