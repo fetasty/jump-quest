@@ -1,7 +1,22 @@
-[gd_resource type="Resource" script_class="Difficulty" load_steps=2 format=3 uid="uid://hkwbbhlrk3v3"]
+[gd_resource type="Resource" script_class="Difficulty" load_steps=4 format=3 uid="uid://hkwbbhlrk3v3"]
 
-[ext_resource type="Script" uid="uid://cfx0on5pvrs6p" path="res://resource/config/difficulty.gd" id="1_ma0v3"]
+[ext_resource type="Script" uid="uid://1pabhm5do1yf" path="res://resource/config/config.gd" id="1_hpill"]
+[ext_resource type="Script" path="res://resource/config/difficulty.gd" id="1_ma0v3"]
+
+[sub_resource type="Resource" id="Resource_530us"]
+script = ExtResource("1_hpill")
+barrier_speed = 150.0
+barrier_spawn_interval = 0.8
+barrier_upper_size_min = 10
+barrier_upper_size_max = 30
+player_jump_speed = 200.0
+max_player_jump_time = 0.3
+player_gravity = 800.0
+item_generation_rate = Array[float]([])
+item_type_rate = Array[float]([])
+metadata/_custom_type_script = "uid://1pabhm5do1yf"
 
 [resource]
 script = ExtResource("1_ma0v3")
-metadata/_custom_type_script = "uid://cfx0on5pvrs6p"
+id = 1
+basic_config = SubResource("Resource_530us")

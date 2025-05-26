@@ -63,4 +63,4 @@ func _ready() -> void:
 
 
 func reset_runtime_state() -> void:
-	pass
+	current_config.copy_from(current_difficulty_config.basic_config)

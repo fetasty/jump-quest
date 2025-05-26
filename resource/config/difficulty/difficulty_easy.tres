@@ -1,7 +1,95 @@
-[gd_resource type="Resource" script_class="Difficulty" load_steps=2 format=3 uid="uid://bh1gxtrbavvtg"]
+[gd_resource type="Resource" script_class="Difficulty" load_steps=11 format=3 uid="uid://bh1gxtrbavvtg"]
 
-[ext_resource type="Script" uid="uid://cfx0on5pvrs6p" path="res://resource/config/difficulty.gd" id="1_3ym5p"]
+[ext_resource type="Script" path="res://resource/config/difficulty.gd" id="1_3ym5p"]
+[ext_resource type="Script" uid="uid://1pabhm5do1yf" path="res://resource/config/config.gd" id="1_343he"]
+[ext_resource type="Script" path="res://resource/config/dynamic_config.gd" id="2_7ecv3"]
+
+[sub_resource type="Resource" id="Resource_kfq3c"]
+script = ExtResource("1_343he")
+barrier_speed = 100.0
+barrier_spawn_interval = 1.2
+barrier_upper_size_min = 10
+barrier_upper_size_max = 30
+player_jump_speed = 150.0
+max_player_jump_time = 1.0
+player_gravity = 600.0
+item_generation_rate = Array[float]([0.1, 0.1, 0.3])
+item_type_rate = Array[float]([0.3, 0.3, 0.3])
+metadata/_custom_type_script = "uid://1pabhm5do1yf"
+
+[sub_resource type="Resource" id="Resource_343he"]
+script = ExtResource("1_343he")
+barrier_speed = 10.0
+barrier_spawn_interval = -0.11
+barrier_upper_size_min = 0
+barrier_upper_size_max = 0
+player_jump_speed = 5.0
+max_player_jump_time = -0.1
+player_gravity = 50.0
+item_generation_rate = Array[float]([])
+item_type_rate = Array[float]([])
+metadata/_custom_type_script = "uid://1pabhm5do1yf"
+
+[sub_resource type="Resource" id="Resource_7ecv3"]
+script = ExtResource("1_343he")
+barrier_speed = 10.0
+barrier_spawn_interval = -0.09
+barrier_upper_size_min = 0
+barrier_upper_size_max = 0
+player_jump_speed = 5.0
+max_player_jump_time = -0.1
+player_gravity = 50.0
+item_generation_rate = Array[float]([])
+item_type_rate = Array[float]([])
+metadata/_custom_type_script = "uid://1pabhm5do1yf"
+
+[sub_resource type="Resource" id="Resource_6qofm"]
+script = ExtResource("1_343he")
+barrier_speed = 10.0
+barrier_spawn_interval = -0.077
+barrier_upper_size_min = 0
+barrier_upper_size_max = 0
+player_jump_speed = 5.0
+max_player_jump_time = -0.1
+player_gravity = 50.0
+item_generation_rate = Array[float]([])
+item_type_rate = Array[float]([])
+metadata/_custom_type_script = "uid://1pabhm5do1yf"
+
+[sub_resource type="Resource" id="Resource_4uafp"]
+script = ExtResource("1_343he")
+barrier_speed = 10.0
+barrier_spawn_interval = -0.066
+barrier_upper_size_min = 0
+barrier_upper_size_max = 0
+player_jump_speed = 5.0
+max_player_jump_time = -0.1
+player_gravity = 50.0
+item_generation_rate = Array[float]([])
+item_type_rate = Array[float]([])
+metadata/_custom_type_script = "uid://1pabhm5do1yf"
+
+[sub_resource type="Resource" id="Resource_m6gij"]
+script = ExtResource("1_343he")
+barrier_speed = 10.0
+barrier_spawn_interval = -0.057
+barrier_upper_size_min = 0
+barrier_upper_size_max = 0
+player_jump_speed = 5.0
+max_player_jump_time = -0.1
+player_gravity = 50.0
+item_generation_rate = Array[float]([])
+item_type_rate = Array[float]([])
+metadata/_custom_type_script = "uid://1pabhm5do1yf"
+
+[sub_resource type="Resource" id="Resource_e670v"]
+script = ExtResource("2_7ecv3")
+dynamic_interval = Array[float]([10.0, 20.0, 30.0, 40.0, 50.0])
+dynamic_change_value = Array[ExtResource("1_343he")]([SubResource("Resource_343he"), SubResource("Resource_7ecv3"), SubResource("Resource_6qofm"), SubResource("Resource_4uafp"), SubResource("Resource_m6gij")])
+metadata/_custom_type_script = "uid://cpeevbuc76j0e"
 
 [resource]
 script = ExtResource("1_3ym5p")
-metadata/_custom_type_script = "uid://cfx0on5pvrs6p"
+id = 0
+basic_config = SubResource("Resource_kfq3c")
+dynamic_config = SubResource("Resource_e670v")

@@ -119,24 +119,25 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "游戏开始倒计时"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+[node name="DifficultyContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Easy" type="CheckBox" parent="VBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="Easy" type="CheckBox" parent="VBoxContainer/VBoxContainer/DifficultyContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
 button_group = SubResource("ButtonGroup_s8mfa")
 text = "简单"
 
-[node name="Normal" type="CheckBox" parent="VBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="Normal" type="CheckBox" parent="VBoxContainer/VBoxContainer/DifficultyContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
 button_group = SubResource("ButtonGroup_s8mfa")
 text = "一般"
 
-[node name="Hard" type="CheckBox" parent="VBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="Hard" type="CheckBox" parent="VBoxContainer/VBoxContainer/DifficultyContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6

@@ -56,8 +56,8 @@ func change(offset: Config) -> void:
 	player_jump_speed += offset.player_jump_speed
 	max_player_jump_time += offset.max_player_jump_time
 	player_gravity += offset.player_gravity
-	for i in range(0, item_generation_rate.size()):
+	for i in range(0, offset.item_generation_rate.size()):
 		item_generation_rate[i] += offset.item_generation_rate[i]
-	for i in range(0, item_type_rate.size()):
+	for i in range(0, offset.item_type_rate.size()):
 		item_type_rate[i] += offset.item_type_rate[i]
 	GameEvent.data_changed.emit(key, self)

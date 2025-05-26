@@ -8,6 +8,7 @@ var role_map: Dictionary = {}
 var difficulty_map: Dictionary = {}
 
 func _ready() -> void:
+	Logger.info("resource_manager ready")
 	load_roles()
 
 

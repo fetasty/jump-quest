@@ -16,6 +16,7 @@ const VERSION_PATH = "res://resource/version.tres"
 @onready var version_info: Label = %VersionInfo
 @onready var guide: Control = %Guide
 @onready var role_select: Control = %RoleSelect
+@onready var difficulty_container: HBoxContainer = %DifficultyContainer
 @onready var difficulty_buttons: Array[Button] = [%Easy, %Normal, %Hard]
 
 ## Should count down before starting game
@@ -59,11 +60,13 @@ func update_game_state_ui(state: int) -> void:
 			role_button.visible = true
 			continue_button.visible = false
 			restart_button.visible = false
+			difficulty_container.visible = true
 		GameState.GAME_STATE_PAUSED:
 			start_button.visible = false
 			role_button.visible = false
 			continue_button.visible = true
 			restart_button.visible = true
+			difficulty_container.visible = false
 		_:
 			pass
 
