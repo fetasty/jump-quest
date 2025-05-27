@@ -3,9 +3,11 @@ extends Node
 const MODULE = &"resource_manager"
 const ROLE_FOLDER = &"res://resource/role"
 const DIFFICULTY_FOLDER = &"res://resource/config/difficulty"
+const BUFF_FOLDER = &"res://resource/buff"
 
 var role_map: Dictionary = {}
 var difficulty_map: Dictionary = {}
+var buff_map: Dictionary = {}
 
 func _ready() -> void:
 	Logger.info("resource_manager ready")
@@ -30,6 +32,18 @@ func get_difficulty(id: int) -> Difficulty:
 	else:
 		Logger.error("Get difficulty by id %s failed!" % id, MODULE)
 		return null
+
+
+func get_buff(id: int) -> Buff:
+	if buff_map.has(id):
+		return buff_map[id]
+	else:
+		Logger.error("Get buff by id %s failed!" % id, MODULE)
+		return null
+
+
+func get_buff_map() -> Dictionary:
+	return buff_map
 
 
 func visit_res_folder(path: String, f: Callable) -> void:
@@ -69,8 +83,19 @@ func load_one_difficulty(res_path: String) -> void:
 			difficulty_map[res_data.id] = res_data
 
 
+func load_one_buff(res_path: String) -> void:
+	var res_data: Buff = load(res_path)
+	if res_data and not res_data.id < 0:
+		if buff_map.has(res_data.id):
+			Logger.error("Duplicate buff id found: %s in file: %s" % [res_data.id, res_path], MODULE)
+		else:
+			buff_map[res_data.id] = res_data
+
+
 func load_roles() -> void:
 	role_map.clear()
 	visit_res_folder(ROLE_FOLDER, load_one_role)
 	difficulty_map.clear()
 	visit_res_folder(DIFFICULTY_FOLDER, load_one_difficulty)
+	buff_map.clear()
+	visit_res_folder(BUFF_FOLDER, load_one_buff)

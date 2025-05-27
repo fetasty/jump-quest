@@ -82,10 +82,12 @@ func update_difficulty_ui(value: int) -> void:
 func restart_game() -> void:
 	Logger.info("Restart game!")
 	GameState.reset_runtime_state()
-	GameState.game_state = GameState.GAME_STATE_PLAYING
 	if GameState.count_down:
+		# TODO count down scene alone, or add counting down state
 		count_down.start()
 		await count_down.finished
+	GameState.game_state = GameState.GAME_STATE_PLAYING
+	UiManager.show_hud()
 	# TODO reset all runtime state, restart game
 
 

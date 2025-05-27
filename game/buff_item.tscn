@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://5x2qgpbr54g0"]
+
+[ext_resource type="Script" uid="uid://tlvb26t04rdb" path="res://game/buff_item.gd" id="1_shjno"]
+[ext_resource type="Texture2D" uid="uid://kwax5jp1jjor" path="res://art/shield.tres" id="1_wjdex"]
+
+[node name="BuffItem" type="CenterContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.5
+offset_top = -27.5
+offset_right = 27.5
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_shjno")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="BuffContainer" type="Control" parent="VBoxContainer/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="BuffTexture" type="TextureRect" parent="VBoxContainer/CenterContainer/BuffContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_top = 4.0
+offset_right = 55.0
+offset_bottom = 59.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_wjdex")
+
+[node name="TimeLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "3.25s"
+horizontal_alignment = 1
+vertical_alignment = 1

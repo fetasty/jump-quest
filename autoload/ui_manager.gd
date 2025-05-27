@@ -19,3 +19,11 @@ func change_menu(menu_path: String) -> void:
 	var menu = menu_src.instantiate()
 	menu.name = "Menu"
 	menu_layer.add_child(menu)
+
+
+func show_hud() -> void:
+	hud_layer.visible = true
+
+
+func hide_hud() -> void:
+	hud_layer.visible = false
