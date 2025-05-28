@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6nklthjxnpy6"]
+
+[ext_resource type="Script" uid="uid://bgimgeeyylp7c" path="res://game/game.gd" id="1_l1rk1"]
+[ext_resource type="PackedScene" uid="uid://c3ckf0gnsc54" path="res://player/player.tscn" id="2_vasa2"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_l1rk1")
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="Barriers" type="Node2D" parent="Environment"]
+unique_name_in_owner = true
+
+[node name="Walls" type="Node2D" parent="Environment"]
+
+[node name="BarrierSpawnTimer" type="Timer" parent="Environment"]
+unique_name_in_owner = true
+
+[node name="Player" parent="." instance=ExtResource("2_vasa2")]
+unique_name_in_owner = true

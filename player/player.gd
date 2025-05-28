@@ -1,11 +1,7 @@
 class_name Player extends Node2D
 
 
-var gravity: float
-var jump_velocity: float
-var max_jumping_time: float
-var sprite_scale: float
-
+var role_res: Role
 
 ## temporary state
 var velocity: float = 0
@@ -15,31 +11,39 @@ var jumping: bool = false
 @onready var sprite_2d: Sprite2D = %Sprite2D
 
 func _ready() -> void:
-	# TODO test
-	gravity = 700
-	jump_velocity = -150
-	max_jumping_time = 0.5
-	sprite_scale = 2.0
-	sprite_2d.scale *= sprite_scale
-	jump_timer.wait_time = max_jumping_time
+	load_data()
+	GameEvent.data_changed.connect(on_data_changed)
 
 
 func _physics_process(delta: float) -> void:
 	if jumping:
-		velocity = jump_velocity
+		velocity = GameState.current_config.player_jump_speed
 	else:
-		velocity += gravity * delta  
+		velocity += GameState.current_config.player_gravity * delta
 	position.y += velocity * delta
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
 		jumping = true
-		jump_timer.start()
+		jump_timer.start(GameState.current_config.max_player_jump_time)
 	elif event.is_action_released("jump"):
 		jumping = false
 		jump_timer.stop()
 
 
+func load_data() -> void:
+	role_res = GameState.role_resource
+	sprite_2d.texture = role_res.texture
+	sprite_2d.scale = Vector2.ONE * role_res.scale
+
+
 func _on_jump_timer_timeout() -> void:
 	jumping = false
+
+
+func on_data_changed(key: StringName, _value: Variant) -> void:
+	match key:
+		Const.REALTIME_CONFIG:
+			load_data()
+		_: pass

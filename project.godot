@@ -28,7 +28,7 @@ GameEvent="*res://autoload/game_event.gd"
 SaveLoadManager="*res://autoload/save_load_manager.gd"
 ResourceManager="*res://autoload/resource_manager.gd"
 GameState="*res://autoload/game_state.gd"
-UiManager="*res://autoload/ui_manager.gd"
+SceneManager="*res://autoload/scene_manager.gd"
 AudioManager="*res://autoload/audio_manager.gd"
 
 [display]

@@ -96,8 +96,8 @@ func restart_game() -> void:
 		count_down.start()
 		await count_down.finished
 	GameState.game_state = GameState.GAME_STATE_PLAYING
-	UiManager.show_hud()
-	# TODO reset all runtime state, restart game
+	SceneManager.show_hud()
+	SceneManager.change_game_scene(SceneManager.GAME_SCENE)
 
 
 func on_data_changed(key: String, value: Variant):

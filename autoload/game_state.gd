@@ -22,7 +22,7 @@ var game_state: int = GAME_STATE_WELCOME:
 	get:
 		return game_state
 
-## Real time effective configuration
+## Real time effective configuration, change event: [Const.REALTIME_CONFIG]
 var current_config: Config = Config.new()
 
 ## Real time buff status (s)
@@ -52,6 +52,13 @@ var round_time: int = 0:
 var current_difficulty_config: Difficulty:
 	get:
 		return ResourceManager.get_difficulty(difficulty)
+
+
+## The role resource that currently works
+var role_resource: Role:
+	get:
+		return ResourceManager.get_role(role)
+
 
 ## Round time string
 var round_time_str: String:
@@ -134,7 +141,6 @@ func _ready() -> void:
 	difficulty = SaveLoadManager.get_value(Const.DIFFICULTY, Difficulty.NORMAL)
 	count_down = SaveLoadManager.get_value(Const.COUNT_DOWN, true)
 	current_config.key = Const.REALTIME_CONFIG
-	current_config.copy_from(current_difficulty_config.basic_config)
 
 
 func reset_runtime_state() -> void:

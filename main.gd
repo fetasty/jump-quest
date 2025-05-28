@@ -16,11 +16,12 @@ func _ready() -> void:
 	get_tree().root.size = GameState.window_size
 	set_window_size_range()
 	Logger.info("Auto set window size to %s" % GameState.window_size)
-	# Initialize ui manager
-	UiManager.hud_layer = hud_layer
-	UiManager.menu_layer = menu_layer
+	# Initialize scene manager
+	SceneManager.hud_layer = hud_layer
+	SceneManager.menu_layer = menu_layer
+	SceneManager.game_layer = game_layer
 	# Show main menu
-	UiManager.change_menu(UiManager.MAIN_MENU)
+	SceneManager.change_menu(SceneManager.MAIN_MENU)
 
 
 func _notification(what) -> void:
@@ -31,19 +32,6 @@ func _notification(what) -> void:
 			set_window_size_range()
 		_:
 			pass
-
-
-func close_game_scene() -> void:
-	for child in game_layer.get_children():
-		child.queue_free()
-
-
-func change_game_scene(scene_path: String) -> void:
-	close_game_scene()
-	var scene_src = load(scene_path) as PackedScene
-	var scene = scene_src.instantiate()
-	scene.name = "World"
-	game_layer.add_child(scene)
 
 
 func set_window_size_range() -> void:

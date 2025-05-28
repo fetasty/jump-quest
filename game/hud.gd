@@ -17,7 +17,7 @@ func load_data() -> void:
 	score.text = str(GameState.score)
 	init_buff_ui()
 	difficulty_label.text = GameState.difficulty_str
-	var role = ResourceManager.get_role(GameState.role)
+	var role = GameState.role_resource
 	role_texture.texture = role.texture
 	role_texture.size = role.texture.get_size() * role.scale
 	role_texture.get_parent().custom_minimum_size = role_texture.size
@@ -42,8 +42,17 @@ func on_data_changed(key: StringName, value: Variant) -> void:
 		Const.DIFFICULTY:
 			difficulty_label.text = GameState.difficulty_str
 		Const.ROLE:
-			role_texture.texture = ResourceManager.get_role(value).texture
+			role_texture.texture = GameState.role_resource.texture
 		Const.ROUND_TIME:
 			round_time_label.text = GameState.round_time_str
+		Const.GAME_STATE:
+			on_game_state_changed(value)
 		_:
 			pass
+
+# TODO
+func on_game_state_changed(state: int) -> void:
+	match state:
+		GameState.GAME_STATE_PLAYING:
+			pass
+		_: pass
