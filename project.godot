@@ -13,6 +13,9 @@ config_version=5
 config/name="jump-quest"
 run/main_scene="uid://cd5n8v8xs40ek"
 config/features=PackedStringArray("4.4", "GL Compatibility")
+boot_splash/show_image=false
+boot_splash/fullsize=false
+boot_splash/use_filter=false
 config/icon="res://icon.svg"
 addons/icon_finder/preview_size=24
 

@@ -12,3 +12,5 @@ const DIFFICULTY = &"difficulty"
 const DEFAULT_CONFIG = &"default_config"
 const REALTIME_CONFIG = &"realtime_config"
 const BUFF = &"buff"
+const WINDOW_SIZE = &"window_size"
+const MIN_WINDOW_SIZE = Vector2i(640, 360)

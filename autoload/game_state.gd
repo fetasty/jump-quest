@@ -71,6 +71,18 @@ var count_down: bool = true:
 			GameEvent.data_changed.emit(Const.COUNT_DOWN, value)
 	get:
 		return count_down
+
+
+## Window size (last time)
+var window_size: Vector2i = Vector2i.ZERO:
+	set(value):
+		if window_size != value:
+			window_size = value
+			var screen_size = DisplayServer.screen_get_size()
+			window_size = window_size.clamp(Const.MIN_WINDOW_SIZE, screen_size)
+			GameEvent.data_changed.emit(Const.WINDOW_SIZE, window_size)
+	get:
+		return window_size
 #endregion
 
 
