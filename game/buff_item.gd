@@ -8,6 +8,7 @@ var buff_res: Buff
 @onready var buff_texture: TextureRect = %BuffTexture
 @onready var time_label: Label = %TimeLabel
 
+# TODO Flashing when time is running out
 
 func _ready() -> void:
 	buff_texture.texture = buff_res.texture
@@ -21,8 +22,13 @@ func on_data_changed(key: StringName, value: Variant) -> void:
 			var id = value.id
 			var time = value.time
 			if id == buff_res.id:
-				time_label.text = "%.2f" % time
+				if time > 1.0:
+					time_label.text = "%ds" % int(time)
+				else:
+					time_label.text = "%.2fs" % time
 				if is_zero_approx(time):
 					visible = false
+				elif not visible:
+					visible = true
 		_:
 			pass

@@ -9,7 +9,7 @@ extends Node
 func _ready() -> void:
 	# Set logger format
 	Logger.time_format = "YYYY.MM.DD hh.mm.ss.SSS"
-	Logger.info("Welcome to 'Jump-Quest', version: %s" % load("res://resource/version.tres").version_str)
+	Logger.info("Welcome to 'Jump-Quest', version: %s" % load("res://resource/version.tres").version_str())
 	# Auto set window size
 	if GameState.window_size.x == 0:
 		GameState.window_size = DisplayServer.screen_get_size() * 0.5
@@ -20,7 +20,7 @@ func _ready() -> void:
 	UiManager.hud_layer = hud_layer
 	UiManager.menu_layer = menu_layer
 	# Show main menu
-	# UiManager.change_menu(UiManager.MAIN_MENU)
+	UiManager.change_menu(UiManager.MAIN_MENU)
 
 
 func _notification(what) -> void:

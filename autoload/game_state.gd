@@ -29,10 +29,22 @@ var current_config: Config = Config.new()
 var buff_status: Array[float] = []
 
 ## Real time score
-var score: int = 0
+var score: int = 0:
+	set(value):
+		if score != value:
+			score = value
+			GameEvent.data_changed.emit(Const.SCORE, value)
+	get:
+		return score
 
-## Round time (s)
-var round_time: float = 0.0
+## Round time (ms)
+var round_time: int = 0:
+	set(value):
+		if round_time != value:
+			round_time = value
+			GameEvent.data_changed.emit(Const.ROUND_TIME, value)
+	get:
+		return round_time
 #endregion
 
 #region Property
@@ -40,6 +52,37 @@ var round_time: float = 0.0
 var current_difficulty_config: Difficulty:
 	get:
 		return ResourceManager.get_difficulty(difficulty)
+
+## Round time string
+var round_time_str: String:
+	get:
+		var ms = round_time % 1000
+		@warning_ignore_start("integer_division")
+		var s = (round_time / 1000) % 60
+		var m = (round_time / 60000) % 60
+		var h = (round_time / 3600000) % 24
+		var d = round_time / 86400000
+		@warning_ignore_restore("integer_division")
+		var parts = []
+		# TODO International
+		if d > 0:
+			parts.append("%dd" % d)
+		if h > 0:
+			parts.append("%dh" % h)
+		if m > 0:
+			parts.append("%dm" % m)
+		parts.append("%.3fs" % (s + ms * 0.001))
+		return "".join(parts)
+
+
+## Dificulty string
+var difficulty_str: String:
+	get:
+		# TODO International
+		match difficulty:
+			Difficulty.EASY: return "简单"
+			Difficulty.NORMAL: return "普通"
+			_: return "困难"
 #endregion
 
 #region Game Settings
