@@ -19,6 +19,7 @@ const VERSION_PATH = "res://resource/version.tres"
 @onready var difficulty_container: HBoxContainer = %DifficultyContainer
 @onready var difficulty_buttons: Array[Button] = [%Easy, %Normal, %Hard]
 @onready var count_down: Control = %CountDown
+@onready var menu_container = %MenuContainer
 
 
 func _ready() -> void:
@@ -47,17 +48,25 @@ func load_data() -> void:
 func update_game_state_ui(state: int) -> void:
 	match state:
 		GameState.GAME_STATE_WELCOME, GameState.GAME_STATE_GAME_OVER:
+			visible = true
+			menu_container.visible = true
 			start_button.visible = true
 			role_button.visible = true
 			continue_button.visible = false
 			restart_button.visible = false
 			difficulty_container.visible = true
 		GameState.GAME_STATE_PAUSED:
+			visible = true
+			menu_container.visible = true
 			start_button.visible = false
 			role_button.visible = false
 			continue_button.visible = true
 			restart_button.visible = true
 			difficulty_container.visible = false
+		GameState.GAME_STATE_COUNTING_DOWN:
+			visible = true
+			menu_container.visible = false
+			pass
 		GameState.GAME_STATE_PLAYING:
 			visible = false
 		_:
@@ -83,7 +92,7 @@ func restart_game() -> void:
 	Logger.info("Restart game!")
 	GameState.reset_runtime_state()
 	if GameState.count_down:
-		# TODO count down scene alone, or add counting down state
+		GameState.game_state = GameState.GAME_STATE_COUNTING_DOWN
 		count_down.start()
 		await count_down.finished
 	GameState.game_state = GameState.GAME_STATE_PLAYING

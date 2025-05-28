@@ -48,53 +48,62 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.392157)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="MenuContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -136.0
+offset_top = -323.5
+offset_right = 136.0
+offset_bottom = 323.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 70
 alignment = 1
 
-[node name="Title" type="Label" parent="VBoxContainer"]
+[node name="Title" type="Label" parent="MenuContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "Jump Quest"
 
-[node name="ScoreContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="ScoreContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/ScoreContainer"]
+[node name="Label" type="Label" parent="MenuContainer/VBoxContainer/ScoreContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "Score:"
 
-[node name="Score" type="Label" parent="VBoxContainer/ScoreContainer"]
+[node name="Score" type="Label" parent="MenuContainer/VBoxContainer/ScoreContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "0"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="MuteIcon" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="MuteIcon" type="Label" parent="MenuContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 0
@@ -104,7 +113,7 @@ script = ExtResource("3_o5w3e")
 icon_settings = SubResource("Resource_1x3cv")
 metadata/_custom_type_script = "uid://sfoyl3fbn8so"
 
-[node name="VolumeSlider" type="HSlider" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="VolumeSlider" type="HSlider" parent="MenuContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
@@ -112,94 +121,94 @@ size_flags_vertical = 4
 max_value = 1.0
 step = 0.05
 
-[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="MenuContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="CountDownButton" type="CheckButton" parent="VBoxContainer/VBoxContainer/CenterContainer"]
+[node name="CountDownButton" type="CheckButton" parent="MenuContainer/VBoxContainer/VBoxContainer/CenterContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "游戏开始倒计时"
 
-[node name="DifficultyContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+[node name="DifficultyContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Easy" type="CheckBox" parent="VBoxContainer/VBoxContainer/DifficultyContainer"]
+[node name="Easy" type="CheckBox" parent="MenuContainer/VBoxContainer/VBoxContainer/DifficultyContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
 button_group = SubResource("ButtonGroup_s8mfa")
 text = "简单"
 
-[node name="Normal" type="CheckBox" parent="VBoxContainer/VBoxContainer/DifficultyContainer"]
+[node name="Normal" type="CheckBox" parent="MenuContainer/VBoxContainer/VBoxContainer/DifficultyContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
 button_group = SubResource("ButtonGroup_s8mfa")
 text = "一般"
 
-[node name="Hard" type="CheckBox" parent="VBoxContainer/VBoxContainer/DifficultyContainer"]
+[node name="Hard" type="CheckBox" parent="MenuContainer/VBoxContainer/VBoxContainer/DifficultyContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
 button_group = SubResource("ButtonGroup_s8mfa")
 text = "困难"
 
-[node name="StartButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+[node name="StartButton" type="Button" parent="MenuContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "开始游戏"
 
-[node name="RoleButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+[node name="RoleButton" type="Button" parent="MenuContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "形象选择"
 
-[node name="ContinueButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+[node name="ContinueButton" type="Button" parent="MenuContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "继续游戏"
 
-[node name="RestartButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+[node name="RestartButton" type="Button" parent="MenuContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "重新开始"
 
-[node name="GuideButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+[node name="GuideButton" type="Button" parent="MenuContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "游戏引导"
 
-[node name="RandButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+[node name="RandButton" type="Button" parent="MenuContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "排行榜"
 
-[node name="ExitButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+[node name="ExitButton" type="Button" parent="MenuContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "退出游戏"
 
-[node name="VersionContainer" type="HBoxContainer" parent="."]
+[node name="VersionContainer" type="HBoxContainer" parent="MenuContainer"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -80.0
+offset_left = -108.0
 offset_top = -60.0
 offset_right = -40.0
 offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="Label" type="Label" parent="VersionContainer"]
+[node name="Label" type="Label" parent="MenuContainer/VersionContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.392543, 0.392543, 0.392543, 1)
 text = "Version:"
 
-[node name="VersionInfo" type="Label" parent="VersionContainer"]
+[node name="VersionInfo" type="Label" parent="MenuContainer/VersionContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.392543, 0.392543, 0.392543, 1)
@@ -219,12 +228,12 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
-[connection signal="drag_ended" from="VBoxContainer/VBoxContainer/HBoxContainer/VolumeSlider" to="." method="_on_volume_slider_drag_ended"]
-[connection signal="toggled" from="VBoxContainer/VBoxContainer/CenterContainer/CountDownButton" to="." method="_on_count_down_button_toggled"]
-[connection signal="pressed" from="VBoxContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/VBoxContainer/RoleButton" to="." method="_on_role_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/VBoxContainer/GuideButton" to="." method="_on_guide_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/VBoxContainer/RandButton" to="." method="_on_rand_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="drag_ended" from="MenuContainer/VBoxContainer/VBoxContainer/HBoxContainer/VolumeSlider" to="." method="_on_volume_slider_drag_ended"]
+[connection signal="toggled" from="MenuContainer/VBoxContainer/VBoxContainer/CenterContainer/CountDownButton" to="." method="_on_count_down_button_toggled"]
+[connection signal="pressed" from="MenuContainer/VBoxContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MenuContainer/VBoxContainer/VBoxContainer/RoleButton" to="." method="_on_role_button_pressed"]
+[connection signal="pressed" from="MenuContainer/VBoxContainer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="MenuContainer/VBoxContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="MenuContainer/VBoxContainer/VBoxContainer/GuideButton" to="." method="_on_guide_button_pressed"]
+[connection signal="pressed" from="MenuContainer/VBoxContainer/VBoxContainer/RandButton" to="." method="_on_rand_button_pressed"]
+[connection signal="pressed" from="MenuContainer/VBoxContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
