@@ -26,7 +26,7 @@ func on_data_changed(key: StringName, value: Variant) -> void:
 					time_label.text = "%ds" % int(time)
 				else:
 					time_label.text = "%.2fs" % time
-				if is_zero_approx(time):
+				if time <= 0.0:
 					visible = false
 				elif not visible:
 					visible = true
