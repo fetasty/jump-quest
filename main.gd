@@ -20,6 +20,7 @@ func _ready() -> void:
 	SceneManager.hud_layer = hud_layer
 	SceneManager.menu_layer = menu_layer
 	SceneManager.game_layer = game_layer
+	game_layer.scale = Vector2.ONE * GameState.game_scale
 	# Show main menu
 	SceneManager.change_menu(SceneManager.MAIN_MENU)
 

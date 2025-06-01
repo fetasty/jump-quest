@@ -16,5 +16,11 @@ unique_name_in_owner = true
 [node name="BarrierSpawnTimer" type="Timer" parent="Environment"]
 unique_name_in_owner = true
 
+[node name="BarrierGenerateTimer" type="Timer" parent="Environment"]
+unique_name_in_owner = true
+autostart = true
+
 [node name="Player" parent="." instance=ExtResource("2_vasa2")]
 unique_name_in_owner = true
+
+[connection signal="timeout" from="Environment/BarrierGenerateTimer" to="." method="_on_barrier_generate_timer_timeout"]

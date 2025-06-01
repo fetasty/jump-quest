@@ -1,16 +1,20 @@
 extends Node2D
 
+const BARRIER = preload("res://game/barrier.tscn")
+
 @onready var barriers: Node2D = %Barriers
 @onready var barrier_spawn_timer: Timer = %BarrierSpawnTimer
 @onready var player: Player = %Player
+@onready var barrier_generate_timer: Timer = %BarrierGenerateTimer
 
 
 func _ready() -> void:
 	GameState.reset_runtime_state()
-	var design_size = get_viewport_rect().size
-	player.position = design_size * 0.5
+	player.position = GameState.design_size * 0.5
 	load_data()
 	GameEvent.data_changed.connect(on_data_changed)
+	barrier_generate_timer.start(GameState.current_config.barrier_spawn_interval)
+	_on_barrier_generate_timer_timeout()
 
 
 func _process(delta: float) -> void:
@@ -38,4 +42,12 @@ func on_data_changed(key: String, value: Variant) -> void:
 	match key:
 		Const.GAME_STATE:
 			on_game_state_changed(value)
+		Const.REALTIME_CONFIG:
+			barrier_generate_timer.wait_time = value.barrier_spawn_interval
 		_: pass
+
+
+func _on_barrier_generate_timer_timeout() -> void:
+	pass # Replace with function body.
+	var barrier = BARRIER.instantiate()
+	barriers.add_child(barrier)

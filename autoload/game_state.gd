@@ -48,6 +48,10 @@ var round_time: int = 0:
 #endregion
 
 #region Property
+## Design size
+var design_size: Vector2:
+	get: return get_viewport().get_visible_rect().size / game_scale
+
 ## The difficulty config that currently works
 var current_difficulty_config: Difficulty:
 	get:
@@ -87,12 +91,22 @@ var difficulty_str: String:
 	get:
 		# TODO International
 		match difficulty:
-			Difficulty.EASY: return "简单"
-			Difficulty.NORMAL: return "普通"
-			_: return "困难"
+			Difficulty.EASY: return tr("简单")
+			Difficulty.NORMAL: return tr("普通")
+			_: return tr("困难")
 #endregion
 
 #region Game Settings
+## The scale of game layer
+var game_scale: float = 2.0:
+	set(value):
+		if game_scale != value:
+			game_scale = value
+			GameEvent.data_changed.emit(Const.GAME_SCALE, value)
+	get:
+		return game_scale
+
+
 ## The role that currently works
 var role: int = Role.CHICK:
 	set(value):

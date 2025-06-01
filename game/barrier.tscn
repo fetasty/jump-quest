@@ -4,3 +4,12 @@
 
 [node name="Barrier" type="Node2D"]
 script = ExtResource("1_nhl80")
+
+[node name="UpperPart" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="LowerPart" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Items" type="Node2D" parent="."]
+unique_name_in_owner = true
