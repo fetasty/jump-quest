@@ -25,6 +25,11 @@ func _physics_process(delta: float) -> void:
 	GameState.round_time += int(delta * 1000)
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("esc"):
+		GameState.game_state = GameState.GAME_STATE_PAUSED
+
+
 func load_data() -> void:
 	on_game_state_changed(GameState.game_state)
 
@@ -32,9 +37,9 @@ func load_data() -> void:
 func on_game_state_changed(state: int) -> void:
 	match state:
 		GameState.GAME_STATE_PLAYING:
-			pass
+			process_mode = Node.PROCESS_MODE_INHERIT
 		GameState.GAME_STATE_PAUSED:
-			pass
+			process_mode = Node.PROCESS_MODE_DISABLED
 		_: pass
 
 

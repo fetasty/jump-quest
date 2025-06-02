@@ -136,8 +136,7 @@ func _on_role_button_pressed() -> void:
 
 
 func _on_continue_button_pressed() -> void:
-	# TODO resume
-	print("Continue button pressed")
+	GameState.game_state = GameState.GAME_STATE_PLAYING
 
 
 func _on_restart_button_pressed() -> void:
