@@ -18,7 +18,6 @@ unique_name_in_owner = true
 
 [node name="BarrierGenerateTimer" type="Timer" parent="Environment"]
 unique_name_in_owner = true
-autostart = true
 
 [node name="Player" parent="." instance=ExtResource("2_vasa2")]
 unique_name_in_owner = true

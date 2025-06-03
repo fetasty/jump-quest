@@ -52,6 +52,22 @@ var round_time: int = 0:
 var design_size: Vector2:
 	get: return get_viewport().get_visible_rect().size / game_scale
 
+
+## Scoring position (x axis)
+var score_pos: float:
+	get: return score_pos_rate * design_size.x
+
+
+## The y axis position of top wall
+var top_wall_pos: float:
+	get: return -wall_pos_offset
+
+
+## The y axis position of bottom wall
+var bottom_wall_pos: float:
+	get: return design_size.y + wall_pos_offset
+
+
 ## The difficulty config that currently works
 var current_difficulty_config: Difficulty:
 	get:
@@ -147,6 +163,14 @@ var window_size: Vector2i = Vector2i.ZERO:
 			GameEvent.data_changed.emit(Const.WINDOW_SIZE, window_size)
 	get:
 		return window_size
+
+
+## Scoring position ratio (from left to right)
+var score_pos_rate: float = 0.3
+
+
+## Wall pixel position offset (relative to top and bottom)
+var wall_pos_offset: float = 30.0
 #endregion
 
 

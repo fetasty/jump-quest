@@ -1,5 +1,8 @@
 extends Node2D
 
+signal score_pos_reached
+signal exited_viewport(barrier: Node2D)
+
 enum {
 	TYPE_IRON,
 	TYPE_WOOD,
@@ -18,6 +21,7 @@ const ALL_HEAD_RES: Array[Texture2D] = [
 	preload("res://art/grass_barrier_head.tres"),
 ]
 
+
 var type: int
 var upper_size: int
 var channel_height: float
@@ -27,6 +31,8 @@ var head_size: Vector2
 var body_height: float
 var head_height: float
 var upper_height: float
+
+var is_score_calculated: bool
 
 var body_res: Texture2D:
 	get: return ALL_BODY_RES[type]
@@ -41,6 +47,36 @@ var head_res: Texture2D:
 
 
 func _ready() -> void:
+	reset()
+
+
+func _process(_delata: float) -> void:
+	if not is_score_calculated and position.x <= GameState.score_pos_rate:
+		is_score_calculated = true
+		score_pos_reached.emit()
+	if position.x < -head_size.x * 2:
+		exited_viewport.emit(self)
+
+
+func _physics_process(delta: float) -> void:
+	position.x -= GameState.current_config.barrier_speed * delta
+
+
+func reset() -> void:
+	# clear barrier parts and collisions
+	# TODO reuse existing barrier parts
+	for child in upper_part.get_children():
+		child.queue_free()
+		upper_part.remove_child(child)
+	for child in lower_part.get_children():
+		child.queue_free()
+		lower_part.remove_child(child)
+	for child in items.get_children():
+		child.queue_free()
+		items.remove_child(child)
+	# reset flags
+	is_score_calculated = false
+	# rebuild barrier
 	var all_type_rate = GameState.current_config.barrier_type_rate.reduce(func(acc, v): return acc + v, 0.0)
 	var type_rand = randf_range(0.0, all_type_rate)
 	type = TYPE_IRON
@@ -69,10 +105,6 @@ func _ready() -> void:
 	generate_item()
 
 
-func _physics_process(delta: float) -> void:
-	position.x -= GameState.current_config.barrier_speed * delta
-
-
 func build_barrier() -> void:
 	var height = GameState.design_size.y
 	var lower_height = height - channel_height - upper_height
@@ -82,8 +114,9 @@ func build_barrier() -> void:
 		lower_height -= head_height
 	lower_size += int(lower_height / body_height)
 	build_part(true, upper_size)
+	build_collision(true, upper_size)
 	build_part(false, lower_size)
-	build_collision(upper_size, lower_size)
+	build_collision(false, lower_size)
 
 
 func build_part(upper: bool, part_size: int) -> void:
@@ -108,7 +141,8 @@ func build_part(upper: bool, part_size: int) -> void:
 		parent.add_child(head)
 
 
-func build_collision(upper_size: int, lower_size: int) -> void:
+func build_collision(upper: bool, part_size: int) -> void:
+	# TODO
 	pass
 
 

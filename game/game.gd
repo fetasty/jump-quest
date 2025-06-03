@@ -7,6 +7,7 @@ const BARRIER = preload("res://game/barrier.tscn")
 @onready var player: Player = %Player
 @onready var barrier_generate_timer: Timer = %BarrierGenerateTimer
 
+var temp_barriers: Array = []
 
 func _ready() -> void:
 	GameState.reset_runtime_state()
@@ -14,11 +15,7 @@ func _ready() -> void:
 	load_data()
 	GameEvent.data_changed.connect(on_data_changed)
 	barrier_generate_timer.start(GameState.current_config.barrier_spawn_interval)
-	_on_barrier_generate_timer_timeout()
-
-
-func _process(delta: float) -> void:
-	pass
+	generate_barrier()
 
 
 func _physics_process(delta: float) -> void:
@@ -32,6 +29,21 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func load_data() -> void:
 	on_game_state_changed(GameState.game_state)
+
+
+func generate_barrier() -> void:
+	var barrier = null
+	if not temp_barriers.is_empty():
+		# TODO test
+		Logger.debug("Temp barriers size: %s, pop barrier from temp array" % temp_barriers.size)
+		barrier = temp_barriers.pop_back()
+	else:
+		barrier = BARRIER.instantiate()
+	if not barrier.score_pos_reached.is_connected(on_barrier_reached_score_pos):
+		barrier.score_pos_reached.connect(on_barrier_reached_score_pos)
+	if not barrier.exited_viewport.is_connected(on_barrier_exited_viewport):
+		barrier.exited_viewport.connect(on_barrier_exited_viewport)
+	barriers.add_child(barrier)
 
 
 func on_game_state_changed(state: int) -> void:
@@ -53,6 +65,13 @@ func on_data_changed(key: String, value: Variant) -> void:
 
 
 func _on_barrier_generate_timer_timeout() -> void:
-	pass # Replace with function body.
-	var barrier = BARRIER.instantiate()
-	barriers.add_child(barrier)
+	generate_barrier()
+
+
+func on_barrier_reached_score_pos() -> void:
+	GameState.score += 1
+
+
+func on_barrier_exited_viewport(barrier: Node2D) -> void:
+	barriers.remove_child(barrier)
+	temp_barriers.append(barrier)
