@@ -1,11 +1,14 @@
 class_name Player extends Node2D
 
 
+signal collided
+
 var role_res: Role
 
 ## temporary state
 var velocity: float = 0
 var jumping: bool = false
+var is_collided: bool = false
 
 @onready var jump_timer: Timer = %JumpTimer
 @onready var sprite_2d: Sprite2D = %Sprite2D
@@ -21,6 +24,10 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity += GameState.current_config.player_gravity * delta
 	position.y += velocity * delta
+	if position.y < GameState.bottom_wall_pos or position.y > GameState.top_wall_pos:
+		if not is_collided:
+			is_collided = true
+			collided.emit.call_deferred()
 
 
 func _unhandled_input(event: InputEvent) -> void:

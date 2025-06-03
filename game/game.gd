@@ -12,6 +12,7 @@ var temp_barriers: Array = []
 func _ready() -> void:
 	GameState.reset_runtime_state()
 	player.position = GameState.design_size * 0.5
+	player.collided.connect(on_player_collided)
 	load_data()
 	GameEvent.data_changed.connect(on_data_changed)
 	barrier_generate_timer.start(GameState.current_config.barrier_spawn_interval)
@@ -75,3 +76,15 @@ func on_barrier_reached_score_pos() -> void:
 func on_barrier_exited_viewport(barrier: Node2D) -> void:
 	barriers.remove_child(barrier)
 	temp_barriers.append(barrier)
+
+
+func on_player_collided() -> void:
+	GameState.game_state = GameState.GAME_STATE_GAME_OVER
+	# TODO game record
+	var record = {
+		"score": GameState.score,
+		"round_time": GameState.round_time,
+		"difficulty": GameState.difficulty,
+		"role": GameState.role,
+	}
+	Logger.info("Game over, record: %s" % record)
