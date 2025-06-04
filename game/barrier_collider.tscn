@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfuo313dxs2v7"]
+
+[ext_resource type="Script" uid="uid://kvxatepofu8p" path="res://game/barrier_collider.gd" id="1_qvaff"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qvaff"]
+
+[node name="BarrierCollider" type="Node2D"]
+script = ExtResource("1_qvaff")
+
+[node name="Area2D" type="Area2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+unique_name_in_owner = true
+shape = SubResource("RectangleShape2D_qvaff")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -20,6 +20,9 @@ var is_alive: bool = true
 
 @onready var jump_timer: Timer = %JumpTimer
 @onready var sprite_2d: Sprite2D = %Sprite2D
+@onready var player_area_2d: Area2D = %PlayerArea2D
+@onready var item_area_2d: Area2D = %ItemArea2D
+
 
 func _ready() -> void:
 	load_data()
@@ -67,3 +70,11 @@ func on_data_changed(key: StringName, _value: Variant) -> void:
 		Const.REALTIME_CONFIG:
 			load_data()
 		_: pass
+
+
+func _on_player_area_2d_area_entered(area: Area2D) -> void:
+	pass # Replace with function body.
+
+
+func _on_item_area_2d_area_entered(area: Area2D) -> void:
+	pass # Replace with function body.
