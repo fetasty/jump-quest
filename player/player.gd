@@ -33,10 +33,10 @@ func _physics_process(delta: float) -> void:
 		velocity += GameState.current_config.player_gravity * delta
 	position.y += velocity * delta
 	if is_alive:
-		if position.y < GameState.bottom_wall_pos:
+		if position.y > GameState.bottom_wall_pos:
 			is_alive = false
 			game_failed.emit.call_deferred(COLLIDED_BOTTOM_WALL)
-		elif position.y > GameState.top_wall_pos:
+		elif position.y < GameState.top_wall_pos:
 			is_alive = false
 			game_failed.emit.call_deferred(COLLIDED_TOP_WALL)
 

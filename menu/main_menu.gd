@@ -114,6 +114,8 @@ func on_data_changed(key: String, value: Variant):
 			update_volume_ui(value)
 		Const.GAME_STATE:
 			update_game_state_ui(value)
+		Const.SCORE:
+			score.text = str(value)
 		_:
 			pass
 

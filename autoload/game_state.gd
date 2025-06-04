@@ -166,7 +166,7 @@ var window_size: Vector2i = Vector2i.ZERO:
 
 
 ## Scoring position ratio (from left to right)
-var score_pos_rate: float = 0.3
+var score_pos_rate: float = 0.4
 
 
 ## Wall pixel position offset (relative to top and bottom)

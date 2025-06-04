@@ -51,7 +51,7 @@ func _ready() -> void:
 
 
 func _process(_delata: float) -> void:
-	if not is_score_calculated and position.x <= GameState.score_pos_rate:
+	if not is_score_calculated and position.x <= GameState.score_pos:
 		is_score_calculated = true
 		score_pos_reached.emit()
 	if position.x < -head_size.x * 2:
@@ -63,6 +63,8 @@ func _physics_process(delta: float) -> void:
 
 
 func reset() -> void:
+	# reset position
+	position = Vector2(GameState.design_size.x + head_size.x, 0.0)
 	# clear barrier parts and collisions
 	# TODO reuse existing barrier parts
 	for child in upper_part.get_children():
@@ -100,7 +102,6 @@ func reset() -> void:
 	upper_size += int(avaliable_height / body_height)
 	upper_height += (upper_size - 1) * body_height
 	channel_height = GameState.current_config.barrier_channel_height
-	position = Vector2(GameState.design_size.x + head_size.x, 0.0)
 	build_barrier()
 	generate_item()
 

@@ -10,6 +10,7 @@ const BARRIER = preload("res://game/barrier.tscn")
 var temp_barriers: Array = []
 
 func _ready() -> void:
+	name = "World"
 	GameState.reset_runtime_state()
 	player.position = GameState.design_size * 0.5
 	player.game_failed.connect(on_game_failed)
@@ -41,6 +42,7 @@ func generate_barrier() -> void:
 		barrier = temp_barriers.pop_back()
 	else:
 		barrier = BARRIER.instantiate()
+		barrier.name = "Barrier%s" % barriers.get_child_count()
 	if not barrier.score_pos_reached.is_connected(on_barrier_reached_score_pos):
 		barrier.score_pos_reached.connect(on_barrier_reached_score_pos)
 	if not barrier.exited_viewport.is_connected(on_barrier_exited_viewport):
@@ -94,6 +96,7 @@ func on_barrier_reached_score_pos() -> void:
 
 func on_barrier_exited_viewport(barrier: Node2D) -> void:
 	barriers.remove_child(barrier)
+	barrier.reset()
 	temp_barriers.append(barrier)
 
 
