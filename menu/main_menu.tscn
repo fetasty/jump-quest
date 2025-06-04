@@ -169,7 +169,7 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "继续游戏"
 
-[node name="RestartButton" type="Button" parent="MenuContainer/VBoxContainer/VBoxContainer"]
+[node name="StopButton" type="Button" parent="MenuContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "重新开始"
@@ -233,7 +233,7 @@ layout_mode = 1
 [connection signal="pressed" from="MenuContainer/VBoxContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/VBoxContainer/RoleButton" to="." method="_on_role_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
-[connection signal="pressed" from="MenuContainer/VBoxContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="MenuContainer/VBoxContainer/VBoxContainer/StopButton" to="." method="_on_stop_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/VBoxContainer/GuideButton" to="." method="_on_guide_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/VBoxContainer/RandButton" to="." method="_on_rand_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

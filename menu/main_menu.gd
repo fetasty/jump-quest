@@ -10,7 +10,7 @@ const VERSION_PATH = "res://resource/version.tres"
 @onready var start_button: Button = %StartButton
 @onready var role_button: Button = %RoleButton
 @onready var continue_button: Button = %ContinueButton
-@onready var restart_button: Button = %RestartButton
+@onready var stop_button: Button = %StopButton
 @onready var guide_button: Button = %GuideButton
 @onready var exit_button: Button = %ExitButton
 @onready var version_info: Label = %VersionInfo
@@ -37,6 +37,12 @@ func _ready() -> void:
 	# TODO play background audio
 
 
+func _gui_input(event: InputEvent) -> void:
+	if event.is_action_pressed("esc") and GameState.game_state == GameState.GAME_STATE_PAUSED:
+		GameState.game_state = GameState.GAME_STATE_PLAYING
+		accept_event()
+
+
 func load_data() -> void:
 	count_down_button.set_pressed_no_signal(GameState.count_down)
 	update_game_state_ui(GameState.game_state)
@@ -53,7 +59,7 @@ func update_game_state_ui(state: int) -> void:
 			start_button.visible = true
 			role_button.visible = true
 			continue_button.visible = false
-			restart_button.visible = false
+			stop_button.visible = false
 			difficulty_container.visible = true
 		GameState.GAME_STATE_PAUSED:
 			visible = true
@@ -61,7 +67,7 @@ func update_game_state_ui(state: int) -> void:
 			start_button.visible = false
 			role_button.visible = false
 			continue_button.visible = true
-			restart_button.visible = true
+			stop_button.visible = true
 			difficulty_container.visible = false
 		GameState.GAME_STATE_COUNTING_DOWN:
 			visible = true
@@ -139,16 +145,13 @@ func _on_continue_button_pressed() -> void:
 	GameState.game_state = GameState.GAME_STATE_PLAYING
 
 
-func _on_restart_button_pressed() -> void:
-	restart_game()
-
-
 func _on_guide_button_pressed() -> void:
 	guide.show()
 
 
 func _on_exit_button_pressed() -> void:
-	get_tree().quit()
+	GameState.game_state = GameState.GAME_STATE_WELCOME
+	get_tree().quit.call_deferred()
 
 
 func _on_rand_button_pressed() -> void:
@@ -158,3 +161,7 @@ func _on_rand_button_pressed() -> void:
 
 func _on_difficulty_button_pressed(value: int) -> void:
 	GameState.difficulty = value
+
+
+func _on_stop_button_pressed():
+	GameState.game_state = GameState.GAME_STATE_WELCOME
