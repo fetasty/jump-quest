@@ -21,6 +21,7 @@ const ALL_HEAD_RES: Array[Texture2D] = [
 	preload("res://art/grass_barrier_head.tres"),
 ]
 
+const COLLIDER: PackedScene = preload("res://game/barrier_collider.tscn")
 
 var type: int
 var upper_size: int
@@ -143,8 +144,9 @@ func build_part(upper: bool, part_size: int) -> void:
 
 
 func build_collision(upper: bool, part_size: int) -> void:
-	# TODO
-	pass
+	if part_size > 0:
+		# Head collider
+		var head_collider = COLLIDER.instantiate()
 
 
 func generate_item() -> void:
