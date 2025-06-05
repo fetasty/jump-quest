@@ -43,7 +43,7 @@ func generate_barrier() -> void:
 		barrier = temp_barriers.pop_back()
 	else:
 		barrier = BARRIER.instantiate()
-		barrier.name = "Barrier%s" % (barrier_index % barriers.get_child_count())
+		barrier.name = "Barrier%s" % barrier_index
 		barrier_index += 1
 	if not barrier.score_pos_reached.is_connected(on_barrier_reached_score_pos):
 		barrier.score_pos_reached.connect(on_barrier_reached_score_pos)
