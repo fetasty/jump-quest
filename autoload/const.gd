@@ -17,3 +17,4 @@ const WINDOW_SIZE = &"window_size"
 const MIN_WINDOW_SIZE = Vector2i(640, 360)
 const SCORE = &"score"
 const ROUND_TIME = &"round_time"
+const RECORDS = &"records"

@@ -173,11 +173,28 @@ var score_pos_rate: float = 0.4
 var wall_pos_offset: float = 30.0
 #endregion
 
+#region datas
+## All game records, sorted by score
+var records: Array
+
+func add_record(record: Dictionary) -> void:
+	records.append(record)
+	records.sort_custom(record_sort_descending)
+	GameEvent.data_changed.emit(Const.RECORDS, records)
+
+
+func record_sort_descending(a: Dictionary, b: Dictionary) -> int:
+	if a["score"] != b["score"]:
+		return a["score"] > b["score"]
+	return a["record_datetime"] > b["record_datetime"]
+#endregion
 
 func _ready() -> void:
 	role = SaveLoadManager.get_value(Const.ROLE, Role.CHICK)
 	difficulty = SaveLoadManager.get_value(Const.DIFFICULTY, Difficulty.NORMAL)
 	count_down = SaveLoadManager.get_value(Const.COUNT_DOWN, true)
+	records = SaveLoadManager.get_value(Const.RECORDS, [])
+	records.sort_custom(record_sort_descending)
 	current_config.key = Const.REALTIME_CONFIG
 
 

@@ -38,6 +38,7 @@ func _ready() -> void:
 
 
 func _gui_input(event: InputEvent) -> void:
+	# FIXME: not working!
 	if event.is_action_pressed("esc") and GameState.game_state == GameState.GAME_STATE_PAUSED:
 		GameState.game_state = GameState.GAME_STATE_PLAYING
 		accept_event()

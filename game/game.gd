@@ -8,6 +8,7 @@ const BARRIER = preload("res://game/barrier.tscn")
 @onready var barrier_generate_timer: Timer = %BarrierGenerateTimer
 
 var temp_barriers: Array = []
+var barrier_index: int = 0
 
 func _ready() -> void:
 	name = "World"
@@ -37,16 +38,17 @@ func load_data() -> void:
 func generate_barrier() -> void:
 	var barrier = null
 	if not temp_barriers.is_empty():
-		# TODO test
+		# TODO There is visible delay in the first reuse
 		Logger.debug("Temp barriers size: %s, pop barrier from temp array" % temp_barriers.size)
 		barrier = temp_barriers.pop_back()
 	else:
 		barrier = BARRIER.instantiate()
-		barrier.name = "Barrier%s" % barriers.get_child_count()
+		barrier.name = "Barrier%s" % (barrier_index % barriers.get_child_count())
+		barrier_index += 1
 	if not barrier.score_pos_reached.is_connected(on_barrier_reached_score_pos):
 		barrier.score_pos_reached.connect(on_barrier_reached_score_pos)
-	if not barrier.exited_viewport.is_connected(on_barrier_exited_viewport):
-		barrier.exited_viewport.connect(on_barrier_exited_viewport)
+	# if not barrier.exited_viewport.is_connected(on_barrier_exited_viewport):
+	# 	barrier.exited_viewport.connect(on_barrier_exited_viewport)
 	barriers.add_child(barrier)
 
 
@@ -94,10 +96,10 @@ func on_barrier_reached_score_pos() -> void:
 	GameState.score += 1
 
 
-func on_barrier_exited_viewport(barrier: Node2D) -> void:
-	barriers.remove_child(barrier)
-	barrier.reset()
-	temp_barriers.append(barrier)
+# func on_barrier_exited_viewport(barrier: Node2D) -> void:
+# 	barriers.remove_child(barrier)
+# 	barrier.reset()
+# 	temp_barriers.append(barrier)
 
 
 func on_game_failed(fail_type: int) -> void:
