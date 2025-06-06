@@ -20,8 +20,8 @@ func _ready() -> void:
 func on_data_changed(key: StringName, value: Variant) -> void:
 	match key:
 		Const.BUFF:
-			var id = value.id
-			var time = value.time
+			var id = value["id"]
+			var time = value["time"]
 			if id == buff_res.id:
 				if time > 1.0:
 					time_label.text = "%ds" % int(time)

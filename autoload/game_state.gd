@@ -176,17 +176,6 @@ var wall_pos_offset: float = 30.0
 #region datas
 ## All game records, sorted by score
 var records: Array
-
-func add_record(record: Dictionary) -> void:
-	records.append(record)
-	records.sort_custom(record_sort_descending)
-	GameEvent.data_changed.emit(Const.RECORDS, records)
-
-
-func record_sort_descending(a: Dictionary, b: Dictionary) -> int:
-	if a["score"] != b["score"]:
-		return a["score"] > b["score"]
-	return a["record_datetime"] > b["record_datetime"]
 #endregion
 
 func _ready() -> void:
@@ -198,8 +187,37 @@ func _ready() -> void:
 	current_config.key = Const.REALTIME_CONFIG
 
 
+func add_record(record: Dictionary) -> void:
+	records.append(record)
+	records.sort_custom(record_sort_descending)
+	GameEvent.data_changed.emit(Const.RECORDS, records)
+
+
+func record_sort_descending(a: Dictionary, b: Dictionary) -> int:
+	if a["score"] != b["score"]:
+		return a["score"] > b["score"]
+	return a["record_datetime"] > b["record_datetime"]
+
+
 func reset_runtime_state() -> void:
 	current_config.copy_from(current_difficulty_config.basic_config)
 	buff_status.clear()
+	for i in range(0, Buff.BUFF_COUNT):
+		buff_status.append(0.0)
 	score = 0
 	round_time = 0
+
+
+func set_buff(id: int, time: float) -> void:
+	if id < buff_status.size():
+		buff_status[id] = time
+		GameEvent.data_changed.emit(Const.BUFF, { "id": id, "time": buff_status[id] })
+
+
+func buff_status_process(delta: float) -> void:
+	for i in range(buff_status.size()):
+		if buff_status[i] > 0.0:
+			buff_status[i] -= delta
+			if buff_status[i] <= 0.0:
+				buff_status[i] = 0.0
+			GameEvent.data_changed.emit(Const.BUFF, { "id": i, "time": buff_status[i] })
