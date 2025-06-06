@@ -1,6 +1,6 @@
 extends Control
 
-const BUFF_ITEM = preload("res://game/buff_item.tscn")
+const BUFF_ITEM = preload("res://hud/buff_item.tscn")
 
 @onready var score: Label = %Score
 @onready var buff_list: HBoxContainer = %BuffList
