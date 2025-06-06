@@ -18,3 +18,6 @@ const MIN_WINDOW_SIZE = Vector2i(640, 360)
 const SCORE = &"score"
 const ROUND_TIME = &"round_time"
 const RECORDS = &"records"
+const BARRIER_TYPE = &"barrier_type"
+const BUFF_ID = &"buff_id"
+const PLAYER_ID = &"player_id"

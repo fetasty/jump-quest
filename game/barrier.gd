@@ -22,6 +22,7 @@ const ALL_HEAD_RES: Array[Texture2D] = [
 ]
 
 const COLLIDER: PackedScene = preload("res://game/barrier_collider.tscn")
+const ITEM: PackedScene = preload("res://game/item.tscn")
 
 var type: int
 var upper_size: int
@@ -148,6 +149,7 @@ func build_collision(upper: bool, part_size: int) -> void:
 	if part_size > 0:
 		# Head collider
 		var head_collider = COLLIDER.instantiate()
+		head_collider.set_meta(Const.BARRIER_TYPE, type)
 		head_collider.name = "HeadCollider"
 		head_collider.init(head_size.x, head_size.y, type)
 		head_collider.position = Vector2(0.0, body_height * (part_size - 1) + head_height * 0.5)
@@ -159,6 +161,7 @@ func build_collision(upper: bool, part_size: int) -> void:
 	if part_size > 1:
 		# Body collider
 		var body_collider = COLLIDER.instantiate()
+		body_collider.set_meta(Const.BARRIER_TYPE, type)
 		body_collider.name = "BodyCollider"
 		var total_body_height = body_height * (part_size - 1)
 		body_collider.init(body_size.x, total_body_height, type)
@@ -183,4 +186,8 @@ func generate_item() -> void:
 			item_type = i
 			break
 		rand -= GameState.current_config.item_type_rate[i]
-	# TODO generate item with type [item_type]
+	# TODO generate item with type [item_type], test
+	var item = ITEM.instantiate()
+	item.buff_id = item_type
+	item.position = Vector2(0.0, head_size.y * randf_range(0.4, 0.6))
+	items.add_child(item)
