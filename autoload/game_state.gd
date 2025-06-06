@@ -208,7 +208,7 @@ func reset_runtime_state() -> void:
 	round_time = 0
 
 
-func set_buff(id: int, time: float) -> void:
+func apply_buff(id: int, time: float) -> void:
 	if id < buff_status.size():
 		buff_status[id] = time
 		GameEvent.data_changed.emit(Const.BUFF, { "id": id, "time": buff_status[id] })

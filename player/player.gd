@@ -73,8 +73,15 @@ func on_data_changed(key: StringName, _value: Variant) -> void:
 
 
 func _on_player_area_2d_area_entered(area: Area2D) -> void:
-	pass # Replace with function body.
+	if area.has_meta(Const.BARRIER_TYPE):
+		var barrier_type = area.get_meta(Const.BARRIER_TYPE)
+		# TODO
+		match barrier_type:
+			_: pass
 
 
 func _on_item_area_2d_area_entered(area: Area2D) -> void:
-	pass # Replace with function body.
+	if area.has_meta(Const.BUFF_ID):
+		var buff_id = area.get_meta(Const.BUFF_ID)
+		var buff_res = ResourceManager.get_buff(buff_id)
+		GameState.apply_buff(buff_id, buff_res.time)

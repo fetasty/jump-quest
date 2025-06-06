@@ -13,3 +13,6 @@ enum {
 
 ## The buff texture
 @export var texture: Texture2D
+
+## Buff time (seconds)
+@export var time: float = 15.0
