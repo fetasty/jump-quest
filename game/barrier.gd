@@ -144,9 +144,30 @@ func build_part(upper: bool, part_size: int) -> void:
 
 
 func build_collision(upper: bool, part_size: int) -> void:
+	var height = GameState.design_size.y
 	if part_size > 0:
 		# Head collider
 		var head_collider = COLLIDER.instantiate()
+		head_collider.name = "HeadCollider"
+		head_collider.init(head_size.x, head_size.y, type)
+		head_collider.position = Vector2(0.0, body_height * (part_size - 1) + head_height * 0.5)
+		if upper:
+			upper_part.add_child(head_collider)
+		else:
+			head_collider.position.y = height - head_collider.position.y
+			lower_part.add_child(head_collider)
+	if part_size > 1:
+		# Body collider
+		var body_collider = COLLIDER.instantiate()
+		body_collider.name = "BodyCollider"
+		var total_body_height = body_height * (part_size - 1)
+		body_collider.init(body_size.x, total_body_height, type)
+		body_collider.position = Vector2(0.0, total_body_height * 0.5)
+		if upper:
+			upper_part.add_child(body_collider)
+		else:
+			body_collider.position.y = height - body_collider.position.y
+			lower_part.add_child(body_collider)
 
 
 func generate_item() -> void:
