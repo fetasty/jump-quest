@@ -11,11 +11,13 @@ const BUFF_ITEM = preload("res://hud/buff_item.tscn")
 func _ready() -> void:
 	load_data()
 	GameEvent.data_changed.connect(on_data_changed)
+	GameEvent.game_started.connect(on_game_started)
 
 
 func load_data() -> void:
 	score.text = str(GameState.score)
 	init_buff_ui()
+	reset_buff_ui()
 	difficulty_label.text = GameState.difficulty_str
 	var role = GameState.role_resource
 	role_texture.texture = role.texture
@@ -33,6 +35,11 @@ func init_buff_ui() -> void:
 		buff_item.name = "Buff%d" % i
 		buff_item.buff_res = buff_res
 		buff_list.add_child(buff_item)
+
+
+func reset_buff_ui() -> void:
+	for child in buff_list.get_children():
+		child.visible  = false
 
 
 func on_data_changed(key: StringName, value: Variant) -> void:
@@ -57,3 +64,7 @@ func on_game_state_changed(state: int) -> void:
 			visible = false
 		_:
 			visible = true
+
+
+func on_game_started() -> void:
+	reset_buff_ui()

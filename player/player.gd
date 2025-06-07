@@ -25,8 +25,14 @@ var is_alive: bool = true
 
 
 func _ready() -> void:
+	position = GameState.design_size * 0.5
 	load_data()
 	GameEvent.data_changed.connect(on_data_changed)
+
+
+func _process(delta: float) -> void:
+	# Update buff status
+	GameState.buff_status_process(delta)
 
 
 func _physics_process(delta: float) -> void:

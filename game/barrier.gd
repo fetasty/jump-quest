@@ -117,9 +117,9 @@ func build_barrier() -> void:
 		lower_height -= head_height
 	lower_size += int(lower_height / body_height)
 	build_part(true, upper_size)
-	build_collision(true, upper_size)
+	build_collider(true, upper_size)
 	build_part(false, lower_size)
-	build_collision(false, lower_size)
+	build_collider(false, lower_size)
 
 
 func build_part(upper: bool, part_size: int) -> void:
@@ -144,7 +144,7 @@ func build_part(upper: bool, part_size: int) -> void:
 		parent.add_child(head)
 
 
-func build_collision(upper: bool, part_size: int) -> void:
+func build_collider(upper: bool, part_size: int) -> void:
 	var height = GameState.design_size.y
 	if part_size > 0:
 		# Head collider
@@ -189,5 +189,5 @@ func generate_item() -> void:
 	# TODO generate item with type [item_type], test
 	var item = ITEM.instantiate()
 	item.buff_id = item_type
-	item.position = Vector2(0.0, head_size.y * randf_range(0.4, 0.6))
+	item.position = Vector2(0.0, GameState.design_size.y * randf_range(0.4, 0.6))
 	items.add_child(item)

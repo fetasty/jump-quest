@@ -9,6 +9,12 @@ extends Node
 func _ready() -> void:
 	# Set logger format
 	Logger.time_format = "YYYY.MM.DD hh.mm.ss.SSS"
+	# TODO debug
+	Logger.set_default_output_level(Logger.VERBOSE)
+	var default_logger = Logger.get_module() as Logger.Module
+	default_logger.set_output_level(Logger.DEBUG)
+
+	Logger.debug("Debug logger mode")
 	Logger.info("Welcome to 'Jump-Quest', version: %s" % load("res://resource/version.tres").version_str())
 	# Auto set window size
 	if GameState.window_size.x == 0:

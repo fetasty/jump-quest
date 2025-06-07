@@ -12,8 +12,7 @@ var barrier_index: int = 0
 
 func _ready() -> void:
 	name = "World"
-	GameState.reset_runtime_state()
-	player.position = GameState.design_size * 0.5
+	GameEvent.game_started.emit()
 	player.game_failed.connect(on_game_failed)
 	load_data()
 	GameEvent.data_changed.connect(on_data_changed)

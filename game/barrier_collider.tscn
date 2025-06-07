@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://kvxatepofu8p" path="res://game/barrier_collider.gd" id="1_qvaff"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qvaff"]
+resource_local_to_scene = true
 
 [node name="BarrierCollider" type="Node2D"]
 script = ExtResource("1_qvaff")

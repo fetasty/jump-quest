@@ -185,6 +185,7 @@ func _ready() -> void:
 	records = SaveLoadManager.get_value(Const.RECORDS, [])
 	records.sort_custom(record_sort_descending)
 	current_config.key = Const.REALTIME_CONFIG
+	GameEvent.game_started.connect(on_game_started)
 
 
 func add_record(record: Dictionary) -> void:
@@ -221,3 +222,7 @@ func buff_status_process(delta: float) -> void:
 			if buff_status[i] <= 0.0:
 				buff_status[i] = 0.0
 			GameEvent.data_changed.emit(Const.BUFF, { "id": i, "time": buff_status[i] })
+
+
+func on_game_started() -> void:
+	reset_runtime_state()

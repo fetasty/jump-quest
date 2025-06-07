@@ -11,7 +11,6 @@ var buff_res: Buff
 # TODO Flashing when time is running out
 
 func _ready() -> void:
-	visible = false
 	buff_texture.texture = buff_res.texture
 	GameEvent.data_changed.connect(on_data_changed)
 	buff_container.custom_minimum_size = buff_texture.size * buff_texture.scale.x
