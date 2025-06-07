@@ -37,7 +37,7 @@ func set_flashing(flashing: bool) -> void:
 
 func on_data_changed(key: StringName, value: Variant) -> void:
 	match key:
-		Const.BUFF:
+		Const.BUFF_TIME:
 			var id = value["id"]
 			var time = value["time"]
 			if id == buff_res.id:

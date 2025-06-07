@@ -196,7 +196,6 @@ func generate_item() -> void:
 
 
 func on_part_destroyed(upper: bool) -> void:
-	Logger.info("%s part destroyed" % ("Upper" if upper else "Lower"))
 	if upper:
 		for child in upper_part.get_children():
 			child.queue_free()

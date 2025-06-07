@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctlnpmx42t7oh"]
+
+[ext_resource type="Texture2D" uid="uid://kwax5jp1jjor" path="res://art/shield.tres" id="1_jc3be"]
+[ext_resource type="Script" uid="uid://ciymcqgwbesxs" path="res://player/buff_item.gd" id="2_3v3oe"]
+
+[node name="BuffItem" type="Sprite2D"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_jc3be")
+script = ExtResource("2_3v3oe")

@@ -12,6 +12,8 @@ enum {
 	COLLIDED_WOOD,
 }
 
+const BUFF_ITEM = preload("res://player/buff_item.tscn")
+
 var role_res: Role
 
 ## temporary state
@@ -23,6 +25,7 @@ var is_alive: bool = true
 @onready var sprite_2d: Sprite2D = %Sprite2D
 @onready var player_area_2d: Area2D = %PlayerArea2D
 @onready var item_area_2d: Area2D = %ItemArea2D
+@onready var buff_items: Node2D = %BuffItems
 
 
 func _ready() -> void:
@@ -78,8 +81,12 @@ func _on_jump_timer_timeout() -> void:
 	jumping = false
 
 
-func on_data_changed(key: StringName, _value: Variant) -> void:
+func on_data_changed(key: StringName, value: Variant) -> void:
 	match key:
 		Const.REALTIME_CONFIG:
 			load_data()
+		Const.ADD_BUFF:
+			var item = BUFF_ITEM.instantiate()
+			item.init(value["id"])
+			buff_items.add_child(item)
 		_: pass
