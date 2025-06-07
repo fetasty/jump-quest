@@ -1,4 +1,5 @@
-class_name Player extends Node2D
+extends Node2D
+class_name Player
 
 
 signal game_failed(fail_type: int)
@@ -28,6 +29,8 @@ func _ready() -> void:
 	position = GameState.design_size * 0.5
 	load_data()
 	GameEvent.data_changed.connect(on_data_changed)
+	player_area_2d.set_meta(Const.PLAYER, self)
+	item_area_2d.set_meta(Const.PLAYER, self)
 
 
 func _process(delta: float) -> void:
@@ -67,6 +70,10 @@ func load_data() -> void:
 	sprite_2d.scale = Vector2.ONE * role_res.scale
 
 
+func barrier_collided(barrier_type: int) -> void:
+	game_failed.emit.call_deferred(COLLIDED_IRON if barrier_type == Barrier.TYPE_IRON else COLLIDED_WOOD)
+
+
 func _on_jump_timer_timeout() -> void:
 	jumping = false
 
@@ -76,18 +83,3 @@ func on_data_changed(key: StringName, _value: Variant) -> void:
 		Const.REALTIME_CONFIG:
 			load_data()
 		_: pass
-
-
-func _on_player_area_2d_area_entered(area: Area2D) -> void:
-	if area.has_meta(Const.BARRIER_TYPE):
-		var barrier_type = area.get_meta(Const.BARRIER_TYPE)
-		# TODO
-		match barrier_type:
-			_: pass
-
-
-func _on_item_area_2d_area_entered(area: Area2D) -> void:
-	if area.has_meta(Const.BUFF_ID):
-		var buff_id = area.get_meta(Const.BUFF_ID)
-		var buff_res = ResourceManager.get_buff(buff_id)
-		GameState.apply_buff(buff_id, buff_res.time)

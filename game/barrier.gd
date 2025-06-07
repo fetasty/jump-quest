@@ -1,4 +1,5 @@
 extends Node2D
+class_name Barrier
 
 signal score_pos_reached
 signal exited_viewport(barrier: Node2D)
@@ -125,7 +126,7 @@ func build_barrier() -> void:
 func build_part(upper: bool, part_size: int) -> void:
 	var height = GameState.design_size.y
 	var start_height = body_height * 0.5
-	var parent = upper_part
+	var parent = upper_part if upper else lower_part
 	for i in range(0, part_size - 1):
 		var body = Sprite2D.new()
 		body.name = "Body%d" % i
@@ -153,6 +154,7 @@ func build_collider(upper: bool, part_size: int) -> void:
 		head_collider.name = "HeadCollider"
 		head_collider.init(head_size.x, head_size.y, type)
 		head_collider.position = Vector2(0.0, body_height * (part_size - 1) + head_height * 0.5)
+		head_collider.destroyed.connect(on_part_destroyed.bind(upper))
 		if upper:
 			upper_part.add_child(head_collider)
 		else:
@@ -166,6 +168,7 @@ func build_collider(upper: bool, part_size: int) -> void:
 		var total_body_height = body_height * (part_size - 1)
 		body_collider.init(body_size.x, total_body_height, type)
 		body_collider.position = Vector2(0.0, total_body_height * 0.5)
+		body_collider.destroyed.connect(on_part_destroyed.bind(upper))
 		if upper:
 			upper_part.add_child(body_collider)
 		else:
@@ -186,8 +189,17 @@ func generate_item() -> void:
 			item_type = i
 			break
 		rand -= GameState.current_config.item_type_rate[i]
-	# TODO generate item with type [item_type], test
 	var item = ITEM.instantiate()
 	item.buff_id = item_type
 	item.position = Vector2(0.0, GameState.design_size.y * randf_range(0.4, 0.6))
 	items.add_child(item)
+
+
+func on_part_destroyed(upper: bool) -> void:
+	Logger.info("%s part destroyed" % ("Upper" if upper else "Lower"))
+	if upper:
+		for child in upper_part.get_children():
+			child.queue_free()
+	else:
+		for child in lower_part.get_children():
+			child.queue_free()

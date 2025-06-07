@@ -16,5 +16,7 @@ func _ready() -> void:
 
 
 func _on_area_2d_area_entered(area_2d: Area2D) -> void:
-	if area_2d.has_meta(Const.PLAYER_ID):
+	if area_2d.has_meta(Const.PLAYER):
+		var buff_res = ResourceManager.get_buff(buff_id)
+		GameState.apply_buff(buff_id, buff_res.time)
 		queue_free()

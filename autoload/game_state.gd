@@ -25,7 +25,7 @@ var game_state: int = GAME_STATE_WELCOME:
 ## Real time effective configuration, change event: [Const.REALTIME_CONFIG]
 var current_config: Config = Config.new()
 
-## Real time buff status (s)
+## Real time buff status (s) [buff_id, buff_time]
 var buff_status: Array[float] = []
 
 ## Real time score
@@ -222,6 +222,10 @@ func buff_status_process(delta: float) -> void:
 			if buff_status[i] <= 0.0:
 				buff_status[i] = 0.0
 			GameEvent.data_changed.emit(Const.BUFF, { "id": i, "time": buff_status[i] })
+
+
+func exist_buff(buff_id: int) -> bool:
+	return buff_status[buff_id] > 0.0
 
 
 func on_game_started() -> void:

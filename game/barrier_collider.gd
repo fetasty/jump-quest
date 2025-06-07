@@ -1,14 +1,14 @@
 extends Node2D
 
 
-
-@onready var area_2d: Area2D = %Area2D
-@onready var collision_shape_2d: CollisionShape2D = %CollisionShape2D
+signal destroyed
 
 var shape_width: float
 var shape_height: float
 var barrier_type: int
 
+@onready var area_2d: Area2D = %Area2D
+@onready var collision_shape_2d: CollisionShape2D = %CollisionShape2D
 
 func init(width: float, height: float, type: int) -> void:
 	shape_width = width
@@ -23,5 +23,13 @@ func _ready() -> void:
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	if area.has_meta(Const.PLAYER_ID):
-		queue_free()
+	if area.has_meta(Const.PLAYER):
+		if (
+			barrier_type == Barrier.TYPE_GRASS
+			or GameState.exist_buff(Buff.BUFF_SHIELD)
+			or (barrier_type == Barrier.TYPE_WOOD and GameState.exist_buff(Buff.BUFF_SAW))
+		):
+			destroyed.emit()
+		else:
+			var player: Player = area.get_meta(Const.PLAYER)
+			player.barrier_collided(barrier_type)
