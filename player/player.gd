@@ -14,6 +14,8 @@ enum {
 
 const BUFF_ITEM = preload("res://player/buff_item.tscn")
 
+const ROTATE_ANGLE = 15 # degree
+
 var role_res: Role
 
 ## temporary state
@@ -46,6 +48,10 @@ func _physics_process(delta: float) -> void:
 		velocity = GameState.current_config.player_jump_speed
 	else:
 		velocity += GameState.current_config.player_gravity * delta
+	if velocity > 0.0:
+		sprite_2d.rotation_degrees = ROTATE_ANGLE
+	else:
+		sprite_2d.rotation_degrees = -ROTATE_ANGLE
 	position.y += velocity * delta
 	if is_alive:
 		if position.y > GameState.bottom_wall_pos:
