@@ -10,6 +10,8 @@ enum {
 	TYPE_GRASS,
 }
 
+# TODO Using resources instead of const config
+
 const ALL_BODY_RES: Array[Texture2D] = [
 	preload("res://art/iron_barrier_body.tres"),
 	preload("res://art/wood_barrier_body.tres"),
@@ -21,9 +23,16 @@ const ALL_HEAD_RES: Array[Texture2D] = [
 	preload("res://art/wood_barrier_head.tres"),
 	preload("res://art/grass_barrier_head.tres"),
 ]
+# TODO test
+const ALL_COLOR: Array[Color] = [
+	Color.SKY_BLUE,
+	Color.GOLDENROD,
+	Color.DARK_CYAN,
+]
 
 const COLLIDER: PackedScene = preload("res://game/barrier_collider.tscn")
 const ITEM: PackedScene = preload("res://game/item.tscn")
+const BREAK_EFFECT: PackedScene = preload("res://game/break_effect.tscn")
 
 var type: int
 var upper_size: int
@@ -202,3 +211,13 @@ func on_part_destroyed(upper: bool) -> void:
 	else:
 		for child in lower_part.get_children():
 			child.queue_free()
+	var player = get_tree().get_first_node_in_group(Const.GROUP_PLAYER)
+	if player == null:
+		Logger.error("Cannot find player for break effect!")
+	else:
+		var effect = BREAK_EFFECT.instantiate() as GPUParticles2D
+		effect.color = ALL_COLOR[type]
+		effect.global_position = player.global_position
+		add_child(effect)
+		# effect.restart() # TODO test
+

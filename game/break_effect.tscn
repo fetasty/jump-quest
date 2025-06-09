@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://d3l0otbit442o"]
+[gd_scene load_steps=3 format=3 uid="uid://cwm7d15ktla0h"]
+
+[ext_resource type="Script" uid="uid://ddp3l6wwftfnv" path="res://game/break_effect.gd" id="1_463e4"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_86fou"]
+resource_local_to_scene = true
 particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 10.0
@@ -19,3 +22,4 @@ one_shot = true
 explosiveness = 1.0
 randomness = 0.34
 process_material = SubResource("ParticleProcessMaterial_86fou")
+script = ExtResource("1_463e4")
