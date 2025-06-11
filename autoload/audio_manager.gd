@@ -27,5 +27,5 @@ var volume: float = 0.5:
 
 
 func _ready() -> void:
-	mute = SaveLoadManager.get_value(Const.MUTE, false)
 	volume = SaveLoadManager.get_value(Const.VOLUME, 0.5)
+	mute = SaveLoadManager.get_value(Const.MUTE, false)

@@ -37,11 +37,17 @@ var round_time: int:
 			round_time = value
 
 
-@onready var score_label: Label
-@onready var record_time_label: Label
-@onready var difficulty_label: Label
-@onready var round_time_label: Label
-@onready var role_rect: TextureRect
+@onready var rank_label = %RankLabel
+@onready var score_label = %ScoreLabel
+@onready var round_time_label = %RoundTimeLabel
+@onready var role_container = %Role
+@onready var role_texture = %RoleTexture
+@onready var difficulty_label = %DifficultyLabel
+@onready var record_time_label = %RecordTimeLabel
+
+
+func _ready() -> void:
+	pass
 
 
 func update_rank_data(rank_data: Dictionary) -> void:
@@ -50,7 +56,3 @@ func update_rank_data(rank_data: Dictionary) -> void:
 	role = rank_data["role"]
 	difficulty = rank_data["difficulty"]
 	round_time = rank_data["round_time"]
-
-
-func _ready() -> void:
-	pass
