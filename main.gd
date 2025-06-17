@@ -1,16 +1,16 @@
 extends Node
 
 
-@onready var game_layer: CanvasLayer = %GameLayer		# Layer for 2d game world
-@onready var hud_layer: CanvasLayer = %HudLayer 		# layer for hud ui
-@onready var menu_layer: CanvasLayer = %MenuLayer		# layer for menu (pause menu, main menu)
-
+@onready var game_layer: CanvasLayer = %GameLayer # Layer for 2d game world
+@onready var hud_layer: CanvasLayer = %HudLayer # layer for hud ui
+@onready var menu_layer: CanvasLayer = %MenuLayer # layer for menu (pause menu, main menu)
+@onready var audios: Node = %Audios # Audio container
 
 func _ready() -> void:
 	# Set logger format
 	Logger.time_format = "YYYY.MM.DD hh.mm.ss.SSS"
 	# TODO debug
-	Logger.set_default_output_level(Logger.VERBOSE)
+	# Logger.set_default_output_level(Logger.VERBOSE) # Do not work
 	var default_logger = Logger.get_module() as Logger.Module
 	default_logger.set_output_level(Logger.DEBUG)
 
@@ -27,6 +27,8 @@ func _ready() -> void:
 	SceneManager.menu_layer = menu_layer
 	SceneManager.game_layer = game_layer
 	game_layer.scale = Vector2.ONE * GameState.game_scale
+	# Initialize audio manager
+	AudioManager.audios = audios
 	# Show main menu
 	SceneManager.change_menu(SceneManager.MAIN_MENU)
 
