@@ -105,7 +105,7 @@ func play_sound(audio_path: String) -> void:
 func on_player_finished(player: AudioStreamPlayer) -> void:
 	sound_player_active_arr.erase(player)
 	sound_player_idle_arr.push_back(player)
-	audios.remove_player(player)
+	audios.remove_child(player)
 
 
 func on_background_player_finished() -> void:

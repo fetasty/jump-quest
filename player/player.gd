@@ -68,6 +68,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		jumping = true
 		jump_timer.start(GameState.current_config.max_player_jump_time)
 		get_viewport().set_input_as_handled()
+		AudioManager.play_sound(role_res.jump_audio_path)
 	elif event.is_action_released("jump"):
 		jumping = false
 		jump_timer.stop()
@@ -81,6 +82,7 @@ func load_data() -> void:
 
 
 func barrier_collided(barrier_type: int) -> void:
+	AudioManager.play_sound(Const.HIT_SOUND)
 	game_failed.emit.call_deferred(COLLIDED_IRON if barrier_type == Barrier.TYPE_IRON else COLLIDED_WOOD)
 
 

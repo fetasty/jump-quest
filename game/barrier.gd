@@ -205,6 +205,7 @@ func generate_item() -> void:
 
 
 func on_part_destroyed(upper: bool) -> void:
+	AudioManager.play_sound(Const.CRACK_SOUND)
 	if upper:
 		for child in upper_part.get_children():
 			child.queue_free()

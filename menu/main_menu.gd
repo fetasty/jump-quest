@@ -25,6 +25,7 @@ const VERSION_PATH = "res://resource/version.tres"
 func _ready() -> void:
 	# connect signals
 	GameEvent.data_changed.connect(on_data_changed)
+	AudioManager.background_finished.connect(on_background_finished)
 	mute_icon.clicked.connect(on_mute_icon_clicked)
 	for i in range(0, difficulty_buttons.size()):
 		var btn = difficulty_buttons[i]
@@ -34,7 +35,6 @@ func _ready() -> void:
 	version_info.text = version.version_str()
 	# load data
 	load_data()
-	# TODO play background audio
 
 
 func _gui_input(event: InputEvent) -> void:
@@ -62,6 +62,8 @@ func update_game_state_ui(state: int) -> void:
 			continue_button.visible = false
 			stop_button.visible = false
 			difficulty_container.visible = true
+			# play background audio
+			AudioManager.play_background(Const.MAIN_MENU_BACK_AUDIO)
 		GameState.GAME_STATE_PAUSED:
 			visible = true
 			menu_container.visible = true
@@ -73,9 +75,10 @@ func update_game_state_ui(state: int) -> void:
 		GameState.GAME_STATE_COUNTING_DOWN:
 			visible = true
 			menu_container.visible = false
-			pass
+			AudioManager.stop_background()
 		GameState.GAME_STATE_PLAYING:
 			visible = false
+			AudioManager.play_background(Const.GAME_BACK_AUDIO)
 		_:
 			pass
 
@@ -117,6 +120,17 @@ func on_data_changed(key: String, value: Variant):
 			update_game_state_ui(value)
 		Const.SCORE:
 			score.text = str(value)
+		_:
+			pass
+
+
+func on_background_finished() -> void:
+	await get_tree().create_timer(randf_range(5.0, 15.0)).timeout
+	match GameState.game_state:
+		GameState.GAME_STATE_WELCOME, GameState.GAME_STATE_GAME_OVER:
+			AudioManager.play_background(Const.MAIN_MENU_BACK_AUDIO)
+		GameState.GAME_STATE_PLAYING, GameState.GAME_STATE_PAUSED:
+			AudioManager.play_background(Const.GAME_BACK_AUDIO)
 		_:
 			pass
 

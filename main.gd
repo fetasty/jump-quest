@@ -32,6 +32,7 @@ func _ready() -> void:
 
 
 func _notification(what) -> void:
+	# TODO debug, does it really work?
 	match what:
 		NOTIFICATION_WM_SIZE_CHANGED:
 			on_window_size_changed()

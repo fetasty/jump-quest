@@ -8,4 +8,5 @@ script = ExtResource("1_k7pw3")
 id = 2
 texture = ExtResource("2_itxqa")
 scale = 0.9
+jump_audio_path = "res://audio/pig.mp3"
 metadata/_custom_type_script = "uid://th0egijr0bqo"
