@@ -217,7 +217,6 @@ func on_part_destroyed(upper: bool) -> void:
 	else:
 		var effect = BREAK_EFFECT.instantiate() as GPUParticles2D
 		effect.color = ALL_COLOR[type]
-		effect.global_position = player.global_position
 		add_child(effect)
-		# effect.restart() # TODO test
-
+		effect.global_position = player.global_position
+		effect.restart()
