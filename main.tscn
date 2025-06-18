@@ -29,3 +29,6 @@ unique_name_in_owner = true
 [node name="LoadingLayer" type="CanvasLayer" parent="."]
 
 [node name="DebugLayer" type="CanvasLayer" parent="."]
+
+[node name="Audios" type="Node" parent="."]
+unique_name_in_owner = true

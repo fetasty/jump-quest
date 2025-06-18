@@ -60,10 +60,11 @@ var volume: float = 0.5:
 
 
 func _ready() -> void:
-	volume = SaveLoadManager.get_value(Const.VOLUME, 0.5)
-	mute = SaveLoadManager.get_value(Const.MUTE, false)
+	audios = get_node("/root/Main/Audios")
 	background_audio_player = AudioStreamPlayer.new()
 	audios.add_child(background_audio_player)
+	volume = SaveLoadManager.get_value(Const.VOLUME, 0.5)
+	mute = SaveLoadManager.get_value(Const.MUTE, false)
 
 
 func play_background(audio_path: String) -> void:

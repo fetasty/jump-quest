@@ -27,8 +27,6 @@ func _ready() -> void:
 	SceneManager.menu_layer = menu_layer
 	SceneManager.game_layer = game_layer
 	game_layer.scale = Vector2.ONE * GameState.game_scale
-	# Initialize audio manager
-	AudioManager.audios = audios
 	# Show main menu
 	SceneManager.change_menu(SceneManager.MAIN_MENU)
 
