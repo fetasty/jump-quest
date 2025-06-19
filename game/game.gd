@@ -62,7 +62,7 @@ func save_record() -> void:
 		"record_datetime": Time.get_datetime_string_from_system(false, true),
 	}
 	Logger.info("Game over, record: %s" % record)
-	# TODO add new record, save record
+	GameState.add_record(record)
 
 
 func on_game_state_changed(state: int) -> void:
