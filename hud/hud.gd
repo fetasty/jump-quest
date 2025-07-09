@@ -57,7 +57,7 @@ func on_data_changed(key: StringName, value: Variant) -> void:
 		_:
 			pass
 
-# TODO
+
 func on_game_state_changed(state: int) -> void:
 	match state:
 		GameState.GAME_STATE_WELCOME, GameState.GAME_STATE_COUNTING_DOWN:

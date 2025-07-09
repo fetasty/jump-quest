@@ -20,7 +20,6 @@ var mute: bool = false:
 			Logger.info("Set mute: %s" % mute, KEY_AUDIO_MANAGER)
 			mute = value
 			GameEvent.data_changed.emit(Const.MUTE, value)
-			# TODO change audio player mute
 			if mute:
 				background_audio_player.volume_linear = 0
 				for sound_player in sound_player_active_arr:
@@ -43,7 +42,6 @@ var volume: float = 0.5:
 			Logger.info("Set volume: %s" % value, KEY_AUDIO_MANAGER)
 			volume = value
 			GameEvent.data_changed.emit(Const.VOLUME, value)
-			# TODO change audio player volume
 			if value < 0.01:
 				mute = true
 			else:

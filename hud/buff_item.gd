@@ -12,7 +12,6 @@ var is_flashing: bool = false
 @onready var buff_texture: TextureRect = %BuffTexture
 @onready var time_label: Label = %TimeLabel
 
-# TODO Flashing when time is running out
 
 func _ready() -> void:
 	buff_texture.texture = buff_res.texture

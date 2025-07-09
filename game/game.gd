@@ -46,6 +46,8 @@ func generate_barrier() -> void:
 		barrier_index += 1
 	if not barrier.score_pos_reached.is_connected(on_barrier_reached_score_pos):
 		barrier.score_pos_reached.connect(on_barrier_reached_score_pos)
+	if not barrier.part_destroyed.is_connected(on_barrier_part_destroyed):
+		barrier.part_destroyed.connect(on_barrier_part_destroyed)
 	# if not barrier.exited_viewport.is_connected(on_barrier_exited_viewport):
 	# 	barrier.exited_viewport.connect(on_barrier_exited_viewport)
 	barriers.add_child(barrier)
@@ -92,7 +94,19 @@ func _on_barrier_generate_timer_timeout() -> void:
 
 
 func on_barrier_reached_score_pos() -> void:
-	GameState.score += 1
+	GameState.add_score(1)
+
+
+func on_barrier_part_destroyed(type: int) -> void:
+	match type:
+		Barrier.TYPE_GRASS:
+			GameState.add_score(2)
+		Barrier.TYPE_WOOD:
+			GameState.add_score(3)
+		Barrier.TYPE_IRON:
+			GameState.add_score(5)
+		_:
+			pass
 
 
 # func on_barrier_exited_viewport(barrier: Node2D) -> void:

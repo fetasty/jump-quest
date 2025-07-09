@@ -2,6 +2,7 @@ extends Node2D
 class_name Barrier
 
 signal score_pos_reached
+signal part_destroyed(type: int)
 signal exited_viewport(barrier: Node2D)
 
 enum {
@@ -27,7 +28,7 @@ const ALL_HEAD_RES: Array[Texture2D] = [
 const ALL_COLOR: Array[Color] = [
 	Color.SKY_BLUE,
 	Color.GOLDENROD,
-	Color.DARK_CYAN,
+	Color.DARK_GREEN,
 ]
 
 const COLLIDER: PackedScene = preload("res://game/barrier_collider.tscn")
@@ -206,6 +207,7 @@ func generate_item() -> void:
 
 func on_part_destroyed(upper: bool) -> void:
 	AudioManager.play_sound(Const.CRACK_SOUND)
+	part_destroyed.emit(type)
 	if upper:
 		for child in upper_part.get_children():
 			child.queue_free()

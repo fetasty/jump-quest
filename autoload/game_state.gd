@@ -196,7 +196,7 @@ func reset_runtime_state() -> void:
 func apply_buff(id: int, time: float) -> void:
 	if id < buff_status.size():
 		if is_zero_approx(buff_status[id]) and time > 0.0:
-			GameEvent.data_changed.emit(Const.ADD_BUFF, { "id": id, "time": time }) 
+			GameEvent.data_changed.emit(Const.ADD_BUFF, { "id": id, "time": time })
 		buff_status[id] = time
 		GameEvent.data_changed.emit(Const.BUFF_TIME, { "id": id, "time": buff_status[id] })
 
@@ -211,11 +211,20 @@ func buff_status_process(delta: float) -> void:
 				remove_buff = true
 			GameEvent.data_changed.emit(Const.BUFF_TIME, { "id": i, "time": buff_status[i] })
 			if remove_buff:
-				GameEvent.data_changed.emit(Const.REMOVE_BUFF, { "id": i }) 
+				GameEvent.data_changed.emit(Const.REMOVE_BUFF, { "id": i })
 
 
 func exist_buff(buff_id: int) -> bool:
 	return buff_status[buff_id] > 0.0
+
+
+func add_score(value: int) -> void:
+	var factor = 1
+	if exist_buff(Buff.BUFF_DOUBLE):
+		factor = 2
+	var add_value = value * factor
+	score += add_value
+	GameEvent.score_added.emit(add_value)
 
 
 func on_game_started() -> void:
