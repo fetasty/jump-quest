@@ -83,33 +83,13 @@ var role_resource: Role:
 ## Round time string
 var round_time_str: String:
 	get:
-		var ms = round_time % 1000
-		@warning_ignore_start("integer_division")
-		var s = (round_time / 1000) % 60
-		var m = (round_time / 60000) % 60
-		var h = (round_time / 3600000) % 24
-		var d = round_time / 86400000
-		@warning_ignore_restore("integer_division")
-		var parts = []
-		# TODO International
-		if d > 0:
-			parts.append("%dd" % d)
-		if h > 0:
-			parts.append("%dh" % h)
-		if m > 0:
-			parts.append("%dm" % m)
-		parts.append("%.3fs" % (s + ms * 0.001))
-		return "".join(parts)
+		return Tools.time_interval_to_string(round_time)
 
 
 ## Dificulty string
 var difficulty_str: String:
 	get:
-		# TODO International
-		match difficulty:
-			Difficulty.EASY: return tr("简单")
-			Difficulty.NORMAL: return tr("普通")
-			_: return tr("困难")
+		return Tools.difficulty_to_str(difficulty)
 #endregion
 
 #region Game Settings
@@ -182,7 +162,9 @@ func _ready() -> void:
 	role = SaveLoadManager.get_value(Const.ROLE, Role.CHICK)
 	difficulty = SaveLoadManager.get_value(Const.DIFFICULTY, Difficulty.NORMAL)
 	count_down = SaveLoadManager.get_value(Const.COUNT_DOWN, true)
-	records = SaveLoadManager.get_value(Const.RECORDS, [])
+	records = SaveLoadManager.get_value(Const.RECORDS, []).duplicate()
+	# TODO
+	Logger.info("load records: %s" % [records])
 	records.sort_custom(record_sort_descending)
 	current_config.key = Const.REALTIME_CONFIG
 	GameEvent.game_started.connect(on_game_started)
@@ -191,7 +173,9 @@ func _ready() -> void:
 func add_record(record: Dictionary) -> void:
 	records.append(record)
 	records.sort_custom(record_sort_descending)
-	GameEvent.data_changed.emit(Const.RECORDS, records)
+	# TODO
+	Logger.info("save records: %s" % [records])
+	GameEvent.data_changed.emit(Const.RECORDS, records.duplicate())
 
 
 func record_sort_descending(a: Dictionary, b: Dictionary) -> int:

@@ -1,6 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://bcc0g0g506rsg"]
+[gd_scene load_steps=7 format=3 uid="uid://bcc0g0g506rsg"]
 
 [ext_resource type="Script" uid="uid://g50jkculkvuq" path="res://menu/rank.gd" id="1_aeioy"]
+[ext_resource type="FontFile" uid="uid://bbfeoo2kuf30n" path="res://addons/icons-fonts/icons_fonts/MaterialIcons/material_design_icons.ttf" id="2_mth2v"]
+[ext_resource type="Script" uid="uid://sfoyl3fbn8so" path="res://addons/icons-fonts/nodes/FontIcon.gd" id="3_ypjwg"]
+[ext_resource type="Script" uid="uid://cb15ev6uj0mae" path="res://addons/icons-fonts/resources/FontIconSetting.gd" id="4_qxeak"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2tnld"]
+font = ExtResource("2_mth2v")
+font_size = 24
+shadow_size = 0
+shadow_color = Color(1, 1, 1, 1)
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_d6jhj"]
+script = ExtResource("4_qxeak")
+icon_font = "MaterialIcons"
+icon_name = "close-thick"
+icon_size = 24
+icon_color = Color(1, 1, 1, 1)
+outline_color = Color(1, 1, 1, 1)
+outline_size = 0
+shadow_color = Color(1, 1, 1, 1)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
 
 [node name="Rank" type="Control"]
 layout_mode = 3
@@ -10,3 +32,81 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_aeioy")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.172833, 0.172833, 0.172833, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.0
+offset_top = 50.0
+offset_right = 24.0
+offset_bottom = 73.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "排行榜"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -62.0
+offset_top = 30.0
+offset_right = -30.0
+offset_bottom = 62.0
+grow_horizontal = 0
+
+[node name="FontIcon" type="Label" parent="Button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "󱎘"
+label_settings = SubResource("LabelSettings_2tnld")
+script = ExtResource("3_ypjwg")
+icon_settings = SubResource("Resource_d6jhj")
+metadata/_custom_type_script = "uid://sfoyl3fbn8so"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+custom_minimum_size = Vector2(800, 550)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -240.0
+offset_right = 400.0
+offset_bottom = 310.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RankItems" type="VBoxContainer" parent="ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -20,6 +20,7 @@ const VERSION_PATH = "res://resource/version.tres"
 @onready var difficulty_buttons: Array[Button] = [%Easy, %Normal, %Hard]
 @onready var count_down: Control = %CountDown
 @onready var menu_container = %MenuContainer
+@onready var rank: Control = %Rank
 
 
 func _ready() -> void:
@@ -172,8 +173,7 @@ func _on_exit_button_pressed() -> void:
 
 
 func _on_rand_button_pressed() -> void:
-	# TODO rank list
-	print("Rank button pressed")
+	rank.show()
 
 
 func _on_difficulty_button_pressed(value: int) -> void:
